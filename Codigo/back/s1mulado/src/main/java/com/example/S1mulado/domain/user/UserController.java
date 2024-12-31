@@ -2,6 +2,7 @@ package com.example.S1mulado.domain.user;
 
 import com.example.S1mulado.domain.test.Test;
 import com.example.S1mulado.domain.test.TestRepository;
+import com.example.S1mulado.domain.test.TestService;
 import com.example.S1mulado.domain.user.dto.OwnUserData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,23 +16,21 @@ import java.util.List;
 @RequestMapping("/users")
 public class UserController {
 
-    @Autowired
-    UserRepository userRepository;
 
     @Autowired
-    TestRepository testRepository;
+    UserService userService;
+
+    @Autowired
+    private TestService testService;
 
     @GetMapping("/me")
     public ResponseEntity<OwnUserData> getMe(@AuthenticationPrincipal UserDetails userDetails){
 
-        User user = (User)userDetails;
+        User user = userService.FindLoggedUser(userDetails);
 
-        String username = user.getUsername();
-        String email = user.getEmail();
-        String phoneNumber = user.getPhoneNumber();
-        String role = user.getRole().toString();
+        OwnUserData ownUserData = userService.findOwnUserData(user);
 
-        return ResponseEntity.ok(new OwnUserData(username, email, phoneNumber, role));
+        return ResponseEntity.ok(ownUserData);
 
     }
 
@@ -39,25 +38,25 @@ public class UserController {
     @GetMapping("/me/tests")
     public ResponseEntity<List<Test>> getMeTests(@AuthenticationPrincipal UserDetails userDetails){
 
-        User user = (User)userDetails;
+        User user = userService.FindLoggedUser(userDetails);
 
-        List<Test> tests = testRepository.findTestByUser(user);
+        List<Test> tests = testService.findOwnUserTests(user);
 
         return ResponseEntity.ok(tests);
 
     }
 
+
     @PutMapping("/me")
-    public ResponseEntity<OwnUserData> putMe(@AuthenticationPrincipal UserDetails userDetails, @RequestBody OwnUserData ownUserData){
+    public ResponseEntity<OwnUserData> putMe(@AuthenticationPrincipal UserDetails userDetails, @RequestBody OwnUserData newData){
 
-        User user = (User)userDetails;
-        user.setEmail(ownUserData.email());
-        user.setPhoneNumber(ownUserData.phoneNumber());
+        User user = userService.FindLoggedUser(userDetails);
 
-        userRepository.save(user);
+        OwnUserData updatedUserData = userService.updateOwnUserData(user, newData);
 
-        return ResponseEntity.ok(new OwnUserData(user.getUsername(), user.getEmail(), user.getPhoneNumber(), user.getRole().toString()));
+        return ResponseEntity.ok(updatedUserData);
 
     }
+
 
 }

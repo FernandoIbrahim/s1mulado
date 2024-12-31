@@ -8,6 +8,7 @@ import com.example.S1mulado.domain.test.exception.TestNotFoundException;
 import com.example.S1mulado.domain.testquestion.TestQuestion;
 import com.example.S1mulado.domain.testquestion.TestQuestionRepository;
 import com.example.S1mulado.domain.testquestion.TestQuestionService;
+import com.example.S1mulado.domain.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -72,6 +73,11 @@ public class TestService {
 
         return testRepository.save(test);
 
+    }
+
+
+    public List<Test> findOwnUserTests(User user) {
+        return testRepository.findTestByUser(user);
     }
 
 
