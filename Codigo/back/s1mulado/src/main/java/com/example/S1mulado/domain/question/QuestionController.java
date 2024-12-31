@@ -11,52 +11,45 @@ import java.util.List;
 @RestController
 public class QuestionController {
 
+
     @Autowired
-    QuestionRepository questionRepository;
+    private QuestionService questionService;
 
     @PostMapping("/questions")
-    public  Question post(@Valid @RequestBody Question question){
+    public ResponseEntity<Question> post(@Valid @RequestBody Question question){
 
-        Question newQuestion = questionRepository.save(question);
+        Question newQuestion = questionService.create(question);
 
-        return newQuestion;
+        return ResponseEntity.ok().body(newQuestion);
 
     }
 
     @GetMapping("/questions")
-    public List<Question> getAll(){
+    public ResponseEntity<List<Question>> getAll(){
 
-        System.out.println(questionRepository.findAll());
-        return questionRepository.findAll();
+       List<Question> foundQuestions = questionService.findAll();
+
+       return ResponseEntity.ok().body(foundQuestions);
 
     }
 
 
     @GetMapping("/questions/{id}")
-    public Question getOne(@PathVariable Long id) {
+    public ResponseEntity<Question> getOne(@PathVariable Long id) {
 
-        return questionRepository.findById(id)
-                .orElseThrow(() -> new QuestionNotFoundException(String.format("Question with id %s not found", id)));
+        Question foundQuestion = questionService.findById(id);
+
+        return ResponseEntity.ok().body(foundQuestion);
+
     }
 
 
-    @PutMapping("/questions/{id}")
-    public ResponseEntity<Question> put(@Valid @RequestBody Question newQuestion, @PathVariable Long id) {
+    @PatchMapping("/questions/{id}")
+    public ResponseEntity<Question> patchMapping(@Valid @RequestBody Question questionData, @PathVariable Long id) {
 
-        Question existingQuestion = questionRepository.findById(id)
-                .orElseThrow( () -> new QuestionNotFoundException(String.format("Question with id %s not found", id)));
+        Question question = questionService.update(questionData, id);
 
-        existingQuestion.setYear(newQuestion.getYear());
-        existingQuestion.setKnowledgeArea(newQuestion.getKnowledgeArea());
-        existingQuestion.setSubject(newQuestion.getSubject());
-        existingQuestion.setTitle(newQuestion.getTitle());
-        existingQuestion.setContext(newQuestion.getContext());
-        existingQuestion.setAlternativesIntroduction(newQuestion.getAlternativesIntroduction());
-        existingQuestion.setAlternatives(newQuestion.getAlternatives());
-
-        questionRepository.save(existingQuestion);
-
-        return ResponseEntity.ok(existingQuestion);
+        return ResponseEntity.ok(question);
 
     }
 

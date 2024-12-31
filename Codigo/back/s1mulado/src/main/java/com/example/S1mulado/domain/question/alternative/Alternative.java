@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
+@Table(name = "alternatives")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter

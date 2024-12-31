@@ -5,9 +5,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
+@Table(name = "subjects")
 @Getter
 @Setter
-
 public class Subject {
 
     @Id

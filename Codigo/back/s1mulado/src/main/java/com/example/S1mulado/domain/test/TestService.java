@@ -37,6 +37,7 @@ public class TestService {
         Test newTest = testRepository.save(new Test());
 
         List<Question> questions = questionService.getRandomQuestions(testData.getQuestionsNumber(), testData.getKnowledgeArea());
+        //List<Question> questions = questionService.getRandomQuestions(testData.getQuestionsNumber(), "funcao");
 
         List<TestQuestion> testQuestions = testQuestionService.generateTestQuestionRelationship(questions, newTest);
 

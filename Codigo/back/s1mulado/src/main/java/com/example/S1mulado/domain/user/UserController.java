@@ -47,7 +47,7 @@ public class UserController {
     }
 
 
-    @PutMapping("/me")
+    @PatchMapping("/me")
     public ResponseEntity<OwnUserData> putMe(@AuthenticationPrincipal UserDetails userDetails, @RequestBody OwnUserData newData){
 
         User user = userService.FindLoggedUser(userDetails);

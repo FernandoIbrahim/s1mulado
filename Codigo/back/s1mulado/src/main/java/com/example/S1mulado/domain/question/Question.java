@@ -45,11 +45,10 @@ public class Question {
     @Column(columnDefinition = "TEXT")
     private String correctAwnser;
 
-    @OneToMany(mappedBy = "question")
+    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Alternative> alternatives;
 
-    @OneToMany(mappedBy = "question")
+    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<QuestionImage> images;
-
 
 }
