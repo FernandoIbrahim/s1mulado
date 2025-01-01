@@ -1,7 +1,10 @@
 package com.example.S1mulado.domain.question;
 
+import com.example.S1mulado.domain.question.alternative.Alternative;
 import com.example.S1mulado.domain.question.exception.QuestionNotFoundException;
+import com.example.S1mulado.domain.question.images.QuestionImage;
 import com.example.S1mulado.domain.subject.KnowledgeArea;
+import com.example.S1mulado.util.AssociationUtils;
 import com.example.S1mulado.util.PropertiesUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +20,11 @@ public class QuestionService {
 
     public Question create(Question question){
 
+        Question newQuestion =  questionRepository.save(question);
+
+        AssociationUtils.associateParent(newQuestion, newQuestion.getAlternatives());
+        AssociationUtils.associateParent(newQuestion, newQuestion.getImages());
+
         return questionRepository.save(question);
 
     }
@@ -31,6 +39,7 @@ public class QuestionService {
                 .orElseThrow( () -> new QuestionNotFoundException(String.format("Question with id %s not found", id)));
 
     }
+
 
     public Question update(Question questionData, Long id){
 

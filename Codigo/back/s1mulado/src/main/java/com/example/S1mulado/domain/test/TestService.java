@@ -2,11 +2,10 @@ package com.example.S1mulado.domain.test;
 
 import com.example.S1mulado.domain.question.Question;
 import com.example.S1mulado.domain.question.QuestionService;
-import com.example.S1mulado.domain.test.dto.TestDTO;
+import com.example.S1mulado.domain.test.dto.CreateTestDTO;
 import com.example.S1mulado.domain.test.dto.UpdateTestDTO;
 import com.example.S1mulado.domain.test.exception.TestNotFoundException;
 import com.example.S1mulado.domain.testquestion.TestQuestion;
-import com.example.S1mulado.domain.testquestion.TestQuestionRepository;
 import com.example.S1mulado.domain.testquestion.TestQuestionService;
 import com.example.S1mulado.domain.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +13,6 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -32,7 +30,7 @@ public class TestService {
     private TestQuestionService testQuestionService;
 
 
-    public Test create(TestDTO testData) {
+    public Test create(CreateTestDTO testData) {
 
         Test newTest = testRepository.save(new Test());
 

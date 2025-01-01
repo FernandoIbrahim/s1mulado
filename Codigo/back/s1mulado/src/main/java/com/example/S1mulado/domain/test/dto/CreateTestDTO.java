@@ -8,7 +8,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class TestDTO {
+public class CreateTestDTO {
 
     @Valid
     @NotNull(message = "The number of questions is required.")

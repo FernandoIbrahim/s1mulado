@@ -6,10 +6,10 @@ import java.util.Arrays;
 public class PropertiesUtils {
 
     /**
-     * Retorna os nomes das propriedades que possuem valor null em um objeto.
+     * Returns the names of the properties that have a null value in an object.
      *
-     * @param source Objeto de origem.
-     * @return Array de strings com os nomes das propriedades nulas.
+     * @param source Origen object.
+     * @return an Array of strings with the same name of the null properties.
      */
     public static String[] getNullPropertyNames(Object source) {
         return Arrays.stream(source.getClass().getDeclaredFields())

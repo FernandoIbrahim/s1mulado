@@ -1,6 +1,7 @@
 package com.example.S1mulado.domain.question.images;
 
 import com.example.S1mulado.domain.question.Question;
+import com.example.S1mulado.util.interfaces.Relatable;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -13,7 +14,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-public class QuestionImage {
+public class QuestionImage implements Relatable<Question> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,6 +30,11 @@ public class QuestionImage {
     @JsonIgnore
     @JoinColumn(name = "question_id")
     private Question question;
+
+    @Override
+    public void setParent(Question parent) {
+        this.question = parent;
+    }
 
 }
 

@@ -1,7 +1,7 @@
 package com.example.S1mulado.domain.question.alternative;
 
 import com.example.S1mulado.domain.question.Question;
-import com.example.S1mulado.domain.question.images.QuestionImage;
+import com.example.S1mulado.util.interfaces.Relatable;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -15,7 +15,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class Alternative {
+public class Alternative implements Relatable<Question> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,5 +36,12 @@ public class Alternative {
     @JsonIgnore
     @JoinColumn(name = "question_id")
     private Question question;
+
+
+    @Override
+    public void setParent(Question parent) {
+        this.question = parent;
+    }
+
 
 }
