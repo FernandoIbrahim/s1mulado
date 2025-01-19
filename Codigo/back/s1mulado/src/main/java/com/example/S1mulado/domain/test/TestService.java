@@ -1,6 +1,7 @@
 package com.example.S1mulado.domain.test;
 
 import com.example.S1mulado.domain.question.Question;
+import com.example.S1mulado.domain.question.QuestionRepository;
 import com.example.S1mulado.domain.question.QuestionService;
 import com.example.S1mulado.domain.test.dto.CreateTestDTO;
 import com.example.S1mulado.domain.test.dto.UpdateTestDTO;
@@ -29,13 +30,19 @@ public class TestService {
     @Autowired
     private TestQuestionService testQuestionService;
 
+    @Autowired
+    private QuestionRepository questionRepository;
+
 
     public Test create(CreateTestDTO testData) {
 
         Test newTest = testRepository.save(new Test());
 
-        List<Question> questions = questionService.getRandomQuestions(testData.getQuestionsNumber(), testData.getKnowledgeArea());
-        //List<Question> questions = questionService.getRandomQuestions(testData.getQuestionsNumber(), "funcao");
+        //List<Question> questions = questionService.getRandomQuestions(testData.getQuestionsNumber(), testData.getKnowledgeArea());
+        List<Question> questions = questionService.getRandomQuestionsBySubjectName("funcao", 2);
+
+        //questionService.getQuestionsIdsBySubject("%funcao%", 2);
+
 
         List<TestQuestion> testQuestions = testQuestionService.generateTestQuestionRelationship(questions, newTest);
 

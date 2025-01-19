@@ -11,25 +11,17 @@ import java.util.List;
 @Repository
 public interface QuestionRepository extends JpaRepository<Question, Long> {
 
+
     @Query(value = "SELECT * FROM questions WHERE knowledge_area = :knowledgeArea ORDER BY RANDOM() LIMIT :quantity", nativeQuery = true)
     List<Question> getRandomQuestions(
             @Param("quantity") Long quantity,
             @Param("knowledgeArea") String knowledgeArea
     );
 
+
     @Query(value = """
     SELECT
         q.id AS id,
-        answer1,
-        answer2,
-        answer3,
-        answer4,
-        answer5,
-        header,
-        q.knowledge_area as knowledge_area,
-        title,
-        s.id AS subject_id,
-        s.name AS subject_name
     FROM questions q
     INNER JOIN subject s ON q.subject_id = s.id
     WHERE s.name LIKE :subjectName
@@ -39,6 +31,29 @@ public interface QuestionRepository extends JpaRepository<Question, Long> {
             @Param("quantity") Long quantity,
             @Param("subjectName") String subjectName
     );
+
+
+    @Query(value = """
+        WITH RECURSIVE subject_tree AS (
+            -- Inicia com o sujeito pai
+            SELECT id
+            FROM subjects
+            WHERE name ILIKE :fatherSubject
+            UNION ALL
+            -- Recupera todos os sujeitos filhos (e seus filhos, e assim por diante)
+            SELECT s.id
+            FROM subjects s
+            INNER JOIN subject_tree st ON s.father_subject_id = st.id
+        )
+        -- Agora, busca os IDs das questões associadas a qualquer um dos sujeitos filhos
+        SELECT q.id
+        FROM questions q
+        INNER JOIN subjects s ON q.subject_id = s.id
+        WHERE s.id IN (SELECT id FROM subject_tree)
+        ORDER BY random()
+        LIMIT :quantity
+    """, nativeQuery = true)
+    List<Long> findQuestionIdsBySubjectName(@Param("fatherSubject") String fatherSubject, @Param("quantity") int quantity);
 
 
 }

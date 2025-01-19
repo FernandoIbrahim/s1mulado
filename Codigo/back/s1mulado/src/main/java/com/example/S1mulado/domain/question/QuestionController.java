@@ -1,6 +1,8 @@
 package com.example.S1mulado.domain.question;
 
+import com.example.S1mulado.domain.question.dto.CreateQuestionDTO;
 import com.example.S1mulado.domain.question.exception.QuestionNotFoundException;
+import com.example.S1mulado.domain.subject.Subject;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,9 +18,9 @@ public class QuestionController {
     private QuestionService questionService;
 
     @PostMapping("/questions")
-    public ResponseEntity<Question> post(@Valid @RequestBody Question question){
+    public ResponseEntity<Question> post(@Valid @RequestBody CreateQuestionDTO dto){
 
-        Question newQuestion = questionService.create(question);
+        Question newQuestion = questionService.create(dto);
 
         return ResponseEntity.ok().body(newQuestion);
 
