@@ -12,7 +12,7 @@ public class CreateTestDTO {
 
     @Valid
     @NotNull(message = "The number of questions is required.")
-    private Long questionsNumber;
+    private long questionsNumber;
 
 
     @Valid

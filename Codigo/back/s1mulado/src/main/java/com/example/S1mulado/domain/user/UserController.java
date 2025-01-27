@@ -1,7 +1,6 @@
 package com.example.S1mulado.domain.user;
 
 import com.example.S1mulado.domain.test.Test;
-import com.example.S1mulado.domain.test.TestRepository;
 import com.example.S1mulado.domain.test.TestService;
 import com.example.S1mulado.domain.user.dto.OwnUserData;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +25,7 @@ public class UserController {
     @GetMapping("/me")
     public ResponseEntity<OwnUserData> getMe(@AuthenticationPrincipal UserDetails userDetails){
 
-        User user = userService.FindLoggedUser(userDetails);
+        User user = userService.findLoggedUser(userDetails);
 
         OwnUserData ownUserData = userService.findOwnUserData(user);
 
@@ -38,7 +37,7 @@ public class UserController {
     @GetMapping("/me/tests")
     public ResponseEntity<List<Test>> getMeTests(@AuthenticationPrincipal UserDetails userDetails){
 
-        User user = userService.FindLoggedUser(userDetails);
+        User user = userService.findLoggedUser(userDetails);
 
         List<Test> tests = testService.findOwnUserTests(user);
 
@@ -50,7 +49,7 @@ public class UserController {
     @PatchMapping("/me")
     public ResponseEntity<OwnUserData> putMe(@AuthenticationPrincipal UserDetails userDetails, @RequestBody OwnUserData newData){
 
-        User user = userService.FindLoggedUser(userDetails);
+        User user = userService.findLoggedUser(userDetails);
 
         OwnUserData updatedUserData = userService.updateOwnUserData(user, newData);
 

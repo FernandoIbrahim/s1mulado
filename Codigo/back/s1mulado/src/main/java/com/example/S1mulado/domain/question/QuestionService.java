@@ -86,7 +86,7 @@ public class QuestionService {
 
 
     public List<Question> getRandomQuestionsBySubjectName(String name, int quantity) {
-        List<Long> ids = questionRepository.findQuestionIdsBySubjectName("%"+name+"%", 2);
+        List<Long> ids = questionRepository.findQuestionIdsBySubjectName("%"+name+"%", quantity);
         return getQuestionsByIds(ids);
 
     }

@@ -16,7 +16,7 @@ public class UserService {
     @Autowired
     private TestService testService;
 
-    public User FindLoggedUser(UserDetails userDetails) {
+    public User findLoggedUser(UserDetails userDetails) {
         return (User)userDetails;
     }
 
