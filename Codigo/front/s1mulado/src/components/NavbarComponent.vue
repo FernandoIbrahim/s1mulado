@@ -1,4 +1,5 @@
 <template>
+    
   <nav class=" flex flex-row items-center h-16 justify-between z-10 gap-1 text-[#DADADA] bg-white">
 
       <div class="left-10 flex relative">
@@ -10,19 +11,20 @@
       <div class=" mr-20 relative">
           <ul class="flex flex-row gap-[4vw] items-center">
               <li class="flex items-center">
-                  <IconButtonComponent content = "project" mainUrl = "/project" title="Disputas"/>
+                  <IconButtonComponent content = "project" mainUrl = "/disputas" title="Disputas"/>
               </li>
 
               <li>
-                  <IconButtonComponent content = "education" mainUrl = "/education" title="Provas"/>
+                  <IconButtonComponent content = "education" mainUrl = "/provas" title="Provas"/>
               </li>
 
               <li>
-                  <IconButtonComponent content = "work" mainUrl = "/work" title="Eu"/>
+                  <IconButtonComponent content = "work" mainUrl = "/profile" title="Perfil"/>
               </li>
           </ul>
       </div>
   </nav>
+
 </template>
 
 

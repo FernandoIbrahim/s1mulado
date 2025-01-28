@@ -1,13 +1,13 @@
 <template>
     <div class="tooltip">
 
-        <button  :class= "{ 'on-main-url': isMainURL }"
+        <button :class="{ 'on-main-url': isMainURL }"
             class="flex flex-col justify-center items-center bg-white prevent-selection cursor-default p-0.5 rounded-sm w-20"
             @click = "navigate" 
             @mouseover= "isHovering = true" @mouseout="isHovering = false"
             >
             <!-- <span class="material-symbols-outlined prevent-select"> {{ content }} </span> -->
-            <svg class="w-7 h-7 justify-center items-center p-0.5" :fill="buttonIconColor" >
+            <svg class="w-7 h-7 justify-center items-center p-0.5" :fill="buttonIconStyle" >
                 <use :href="`/icons/icons.svg#${content}`" />
             </svg>
 
@@ -43,14 +43,15 @@ export default {
     data() {
         return {
             isHovering: false,
-            currentPath: ''
+            currentPath: '',
+            buttonIconColor: 'grey'
         };
     },
     computed: {
         isMainURL() {
             return this.mainUrl === this.currentPath;
         },
-        buttonIconColor() {
+        buttonIconStyle() {
             return this.isHovering ? 'black' : '#6b7280';
         },
         buttonTextColor(){
@@ -64,7 +65,6 @@ export default {
             }
             else {
                 this.$router.push(`${this.mainUrl}`);
-                this.isMainURL;
             }
         },
         updateCurrentPath() {
@@ -133,7 +133,7 @@ export default {
 }
 
 .on-main-url {
-  background-color: rgb(38, 38, 38);
+  background-color: rgb(239, 237, 237);
 }
 
 

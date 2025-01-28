@@ -1,22 +1,23 @@
 <template>
 
+    <header>
+        <NavbarComponent> </NavbarComponent>
+    </header>
     <main class="flex w-full flex-grow justify-center align-middle bg-white body ">
-        <TestComponent></TestComponent>
+        <RouterView />
     </main>
 
 </template>
 
 <script>
 
-    import TestComponent from '@/components/test/TestComponent.vue'
+    import NavbarComponent from '@/components/NavbarComponent.vue';
 
     export default {
         name: 'DefaultLayout',
-
         components: {
-            TestComponent
-        }
-
+            NavbarComponent
+        },
     }
 
 </script>
