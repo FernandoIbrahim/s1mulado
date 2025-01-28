@@ -1,30 +1,25 @@
-<script setup lang="ts">
-import HelloWorld from './components/HelloWorld.vue'
-</script>
-
 <template>
-  <div>
-    <a href="https://vite.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+  <div class=" flex flex-col h-screen bg-neutral-900">
+    <NavbarComponent> </NavbarComponent>
+    <DefaultLayout></DefaultLayout>
   </div>
-  <HelloWorld msg="Vite + Vue" />
+
 </template>
 
-<style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
-}
-</style>
+<script>
+
+import DefaultLayout from '@/layouts/DefaultLayout.vue'
+import NavbarComponent from '@/components/NavbarComponent.vue';
+
+export default {
+  name: 'App',
+  components: {
+    DefaultLayout, // Certifique-se de registrar o componente aqui
+    NavbarComponent
+  },
+};
+
+</script>
+
