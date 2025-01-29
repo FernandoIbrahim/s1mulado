@@ -30,7 +30,7 @@
 
 <script>
 
-import IconButtonComponent from '@/components/IconButtonComponent.vue'
+import IconButtonComponent from '@/components/common/IconButtonComponent.vue'
 
 export default {
     name: 'NavbarComponent',

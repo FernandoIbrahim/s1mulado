@@ -11,7 +11,7 @@
 
 <script>
 
-    import NavbarComponent from '@/components/NavbarComponent.vue';
+    import NavbarComponent from '@/components/common/NavbarComponent.vue';
 
     export default {
         name: 'DefaultLayout',
