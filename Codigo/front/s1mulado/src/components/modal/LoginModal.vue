@@ -18,8 +18,12 @@
             <ShadIput type="text" placeholder="senha" v-model="password" class=" mt-8"/>
             <ButtonComponent class=" mt-8" @click="handleLogin">Entrar</ButtonComponent> 
           </TabsContent>
-          <TabsContent value="Registrar" class="mt-4">
-            oi
+          <TabsContent value="Registrar" class="p-4">
+            <ShadIput type="text" placeholder="username" v-model="username" class=" mt-4" />
+            <ShadIput type="text" placeholder="e-mail" v-model="email" class=" mt-8"/>
+            <ShadIput type="text" placeholder="celular" v-model="phoneNumber" class=" mt-8"/>
+            <ShadIput type="text" placeholder="senha" v-model="password" class=" mt-8"/>
+            <ButtonComponent class=" mt-8" @click="handleRegister">Criar conta</ButtonComponent> 
           </TabsContent>
         </Tabs>
       </div>
@@ -36,7 +40,7 @@ import { useLoginModal } from '@/stores/modals.js'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Input as ShadIput} from '@/components/ui/input'
 import  ButtonComponent  from '@/components/common/ButtonComponent.vue'
-import { login } from '@/services/authService.js'
+import { login, register } from '@/services/authService.js'
 
 
 export default{
@@ -45,6 +49,8 @@ export default{
     return {
       username: '',
       password: '',
+      phoneNumber: '',
+      email: '',
       loginModalStore: useLoginModal()
     }
   },
@@ -72,6 +78,36 @@ export default{
           secure: true, 
           sameSite: 'strict' 
         });
+
+        this.loginModalStore.close()
+
+      } catch (error) {
+
+        console.log(error);
+        
+      }
+
+
+    },
+
+
+    async handleRegister() {
+
+      try {
+
+        console.log(this.username);
+        console.log(this.password);
+        console.log(this.email);
+        console.log(this.phoneNumber);
+
+        if (!(this.username) || !(this.password) || !(this.phoneNumber) || (!this.email)) {
+          console.log("Preencha todos os campos")
+          return;
+        }
+
+        const response = await register({username:this.username, password:this.password, email: this.email, phoneNumber:this.phoneNumber});
+      
+        console.log('Registro realizado:', response.data);
 
         this.loginModalStore.close()
 

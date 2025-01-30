@@ -8,6 +8,13 @@ export const login = async (loginData) => {
 
 };
 
+export const register = async (registerData) => {
+    const response = await API_JSON_CLIENT.post("/auth/register", registerData);
+
+    return response;
+
+};
+
 
 export const isUserLoggedIn = () => {
     return (Cookies.get("jwt") !== null && Cookies.get("jwt") !== undefined);
