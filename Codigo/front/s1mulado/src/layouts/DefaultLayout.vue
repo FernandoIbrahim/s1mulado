@@ -1,7 +1,7 @@
 <template>
 
     <header>
-        <NavbarComponent> </NavbarComponent>
+        <NavbarComponent class="fixed w-full"> </NavbarComponent>
     </header>
     <main class="flex w-full flex-grow justify-center align-middle bg-white body ">
         <RouterView />
@@ -16,7 +16,7 @@
     export default {
         name: 'DefaultLayout',
         components: {
-            NavbarComponent
+            NavbarComponent,
         },
     }
 

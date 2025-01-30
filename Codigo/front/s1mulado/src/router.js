@@ -3,9 +3,7 @@ import { createWebHistory, createRouter } from "vue-router"
 import TestComponent from "@/components/test/TestComponent.vue"
 
 const routes = [
-  { path: "/", component: TestComponent },
-  { path: "/disputas", component: TestComponent },
-
+  { path: "/", component: TestComponent }
 ]
 
 const router = createRouter({
