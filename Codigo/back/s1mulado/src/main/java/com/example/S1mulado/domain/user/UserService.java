@@ -13,8 +13,7 @@ public class UserService {
 
     @Autowired
     UserRepository userRepository;
-    @Autowired
-    private TestService testService;
+
 
     public User findLoggedUser(UserDetails userDetails) {
         return (User)userDetails;

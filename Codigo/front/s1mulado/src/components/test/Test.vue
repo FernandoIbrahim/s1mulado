@@ -2,9 +2,7 @@
     <div class="w-full h-full bg-white p-8">
       <h1 class="text-3xl font-bold text-green-600 mb-6">Detalhes da Prova</h1>
       <div class="bg-gray-100 p-6 rounded-lg shadow-md mb-8">
-        <p class="text-gray-700"><strong class="font-semibold">ID:</strong> {{ test.id }}</p>
         <p class="text-gray-700"><strong class="font-semibold">Data:</strong> {{ formatDate(test.date) }}</p>
-        <p class="text-gray-700"><strong class="font-semibold">Número de Questões:</strong> {{ test.questionsNumber }}</p>
       </div>
   
       <h2 class="text-2xl font-bold text-green-600 mb-4">Questões</h2>
@@ -22,38 +20,21 @@
   
         <h4 class="text-lg font-semibold text-gray-800 mt-4 mb-2">Alternativas</h4>
         
-        <RadioGroup v-model="selectedAlternative">
-            <ul>
-              {{ console.log(question.question.alternatives) }}
-              <li 
-                v-for="alternative in question.question.alternatives" 
-                :key="alternative.id" 
-                class="text-gray-700 mb-2 flex items-center space-x-2"
-              >
-                  <div class="flex flex-row min-h-10 w-full items-center bg-gray-100 rounded-md"> 
-                    <RadioGroupItem :id="(alternative.id).toString()" :value="alternative.letter" class="ml-5"/>
-                    <ShadLabel :for="(alternative.id).toString()" class="pl-10">
-                      <span class="pl-5">{{ alternative.text }}</span>
-                    </ShadLabel>
-                  </div>
-              </li>
+        <AlternativesRadioComponent :question-id="question.id" :alternatives="question.question.alternatives"/>
 
-            </ul>
-        </RadioGroup>
       </div>
     </div>
   </template>
   
   <script>
 
-    import { Label as ShadLabel } from '@/components/ui/label'
-    import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
+    import AlternativesRadioComponent from '@/components/test/AlternativesRadioComponent.vue';
+
+export default {
   
-  export default {
     name: 'Test',
     data(){
         return {
-            selectedAlternative: null
         }
     },
     props: {
@@ -69,9 +50,7 @@
       }
     },
     components: {
-        RadioGroup,
-        RadioGroupItem,
-        ShadLabel
+        AlternativesRadioComponent,
     }
-  };
+};
   </script>

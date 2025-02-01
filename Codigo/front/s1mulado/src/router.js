@@ -1,9 +1,11 @@
 import { createWebHistory, createRouter } from "vue-router"
 
-import TestComponent from "@/components/test/TestComponent.vue"
+import CreateTestComponent from "@/components/test/CreateTestComponent.vue"
+import UserProfileComponent from "@/components/user/UserProfileComponent.vue"
 
 const routes = [
-  { path: "/", component: TestComponent }
+  { path: "/", component: CreateTestComponent },
+  { path: "/profile", component: UserProfileComponent}
 ]
 
 const router = createRouter({

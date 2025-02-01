@@ -45,6 +45,16 @@ public class UserController {
 
     }
 
+    @GetMapping("/me/current-test")
+    public ResponseEntity<Test> getMyCurrentTest(@AuthenticationPrincipal UserDetails userDetails){
+
+        User user = userService.findLoggedUser(userDetails);
+        Test test = testService.findCurrentTest(user);
+
+        return ResponseEntity.ok(test);
+
+    }
+
 
     @PatchMapping("/me")
     public ResponseEntity<OwnUserData> putMe(@AuthenticationPrincipal UserDetails userDetails, @RequestBody OwnUserData newData){

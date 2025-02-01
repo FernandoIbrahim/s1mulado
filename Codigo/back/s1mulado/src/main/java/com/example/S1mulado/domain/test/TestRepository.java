@@ -10,4 +10,6 @@ TestRepository extends JpaRepository<Test, Long> {
 
     List<Test> findTestByUser(User user);
 
+    List<Test> findTestByUserAndConcluded(User user, boolean concluded);
+
 }
