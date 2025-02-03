@@ -24,7 +24,7 @@ public class Alternative implements Relatable<Question> {
     @Column(columnDefinition = "TEXT")
     private String text;
 
-    private Boolean isCorrect;
+    private boolean isCorrect;
 
     @Column(columnDefinition = "TEXT")
     private String letter;

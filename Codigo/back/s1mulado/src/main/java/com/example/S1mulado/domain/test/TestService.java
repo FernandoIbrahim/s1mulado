@@ -1,14 +1,11 @@
 package com.example.S1mulado.domain.test;
 
 import com.example.S1mulado.domain.question.Question;
-import com.example.S1mulado.domain.question.QuestionRepository;
 import com.example.S1mulado.domain.question.QuestionService;
 import com.example.S1mulado.domain.test.dto.CreateTestDTO;
-import com.example.S1mulado.domain.test.dto.UpdateTestDTO;
 import com.example.S1mulado.domain.test.exception.TestNotFoundException;
 import com.example.S1mulado.domain.testquestion.TestQuestion;
 import com.example.S1mulado.domain.testquestion.TestQuestionService;
-import com.example.S1mulado.domain.testquestion.dto.UpdateTestQuestionDTO;
 import com.example.S1mulado.domain.user.User;
 import com.example.S1mulado.domain.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +13,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class TestService {
@@ -81,7 +76,10 @@ public class TestService {
 
     public Test findCurrentTest(User user){
 
-        return testRepository.findTestByUserAndConcluded(user, false).getFirst();
+        if(hasCurrentTest(user)){
+            return testRepository.findTestByUserAndConcluded(user, false).getFirst();
+        }
+        return null;
 
     }
 

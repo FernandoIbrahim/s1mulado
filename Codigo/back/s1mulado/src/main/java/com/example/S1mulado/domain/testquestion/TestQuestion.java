@@ -13,7 +13,7 @@ import lombok.Setter;
 @Table(name = "test_question")
 @Getter
 @Setter
- @NoArgsConstructor
+@NoArgsConstructor
 @AllArgsConstructor
 public class TestQuestion {
 
