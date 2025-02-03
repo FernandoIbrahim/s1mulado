@@ -6,3 +6,10 @@ export const create = async (test) => {
     return response;
 
 };
+
+export const patchQuestionAnswer = async (testQuestion) => {
+    const response = await API_JSON_CLIENT.patch("/tests/test-questions", testQuestion);
+
+    return response;
+
+};

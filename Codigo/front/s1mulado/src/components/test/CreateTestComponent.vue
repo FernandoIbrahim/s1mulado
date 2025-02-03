@@ -10,6 +10,8 @@
       </header>
 
       <Test v-if="this.testData" :test="this.testData" />
+
+      
       <LoginModal v-if="this.loginModalStore.active" @login-closed="handleUserCurrentTest"/>
 
     </div>

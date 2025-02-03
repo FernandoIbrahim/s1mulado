@@ -74,7 +74,7 @@ public class TestController {
     }
 
      */
-    @PatchMapping("/test/test-question")
+    @PatchMapping("/tests/test-questions")
     public ResponseEntity<Test> answeringTestQuestion( @RequestBody UpdateTestQuestionDTO updateTestQuestionDTO) {
 
          testQuestionService.answerQuestion(updateTestQuestionDTO);
