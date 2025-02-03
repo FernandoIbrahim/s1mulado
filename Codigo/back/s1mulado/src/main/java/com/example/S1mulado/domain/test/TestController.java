@@ -63,7 +63,7 @@ public class TestController {
     }
 
     /*
-        Atualiza o tempo da realização do teste e as respostas.
+     Atualiza o tempo da realização do teste e as respostas.
     @PatchMapping("/test/{id}")
     public ResponseEntity<Test> answeringTest(@PathVariable Long id, @RequestBody UpdateTestDTO updateTestDTO) {
 
@@ -72,8 +72,17 @@ public class TestController {
         return ResponseEntity.ok(test);
 
     }
+    */
 
-     */
+    @PostMapping("/tests/{id}/end")
+    public ResponseEntity<Test> finalizeTest(@PathVariable Long id, @AuthenticationPrincipal UserDetails userDetails) {
+
+        System.out.println(id);
+        Test test = testService.finalize(id);
+        return ResponseEntity.ok(test);
+
+    }
+
     @PatchMapping("/tests/test-questions")
     public ResponseEntity<Test> answeringTestQuestion( @RequestBody UpdateTestQuestionDTO updateTestQuestionDTO) {
 

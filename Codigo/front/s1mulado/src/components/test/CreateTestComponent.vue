@@ -9,7 +9,7 @@
 
       </header>
 
-      <Test v-if="this.testData" :test="this.testData" />
+      <Test v-if="testStore.test" :test="testStore.test" /> 
 
       
       <LoginModal v-if="this.loginModalStore.active" @login-closed="handleUserCurrentTest"/>
@@ -28,14 +28,22 @@
   import { getUserCurrentTest } from '@/services/userService.js'
   import {create} from '@/services/testService';
 
+  import { useCurrentTestStore } from '@/stores/currentTest'
+
   import SelectMenu from '@/components/common/SelectMenu.vue'
   import ButtonComponent from '@/components/common/ButtonComponent.vue'
   import Test from '@/components/test/Test.vue';
   import LoginModal from '@/components/modal/LoginModal.vue';
-  
+
+
   export default {
     name: 'CreateTestComponent',
-    data(){
+    setup() {
+      const testStore = useCurrentTestStore()
+      return { testStore }
+    },
+    data() {
+
       return {
 
         options: [
@@ -45,12 +53,11 @@
             { id: 4, name: 'Linguagens'}
         ],
         selectedArea: { id: 1, name: 'Exatas' },
-        testData: null,
         loginModalStore: useLoginModal(),
-
         toast: useToast()
 
       }
+
     },
     components: {
       SelectMenu,
@@ -58,58 +65,49 @@
       Test,
       LoginModal
     },
+
     methods: {
-      
+
       async createTest() {
-
         if(!isUserLoggedIn()){
-            this.loginModalStore.open()
-            return
+          this.loginModalStore.open()
+          return
         }
-        
+
         try {
-          
-          const response = await create({ "questionsNumber": 2, "knowledgeArea": "NATURE"});
-          console.log('Resposta do servidor:', response);
-          this.testData = response.data;
-          
+          await create({ 
+            "questionsNumber": 2, 
+            "knowledgeArea": "NATURE"
+          })
+          await this.testStore.update() // Atualiza a store após criar
         } catch (error) {
-
-          this.toast.error('Erro! Você já possui um teste em andamento.');
-          console.error('Erro ao enviar dados:', error);
-
+          this.toast.error('Erro! Você já possui um teste em andamento.')
         }
-
       },
 
-      async handleUserCurrentTest(){
 
-          try{
-              
-              const response =  await getUserCurrentTest();
-
-              if(response.data != undefined || response.data != undefined){
-                this.testData =  response.data
-                
-              }
-              
-          }catch(error){
-              console.log(error)
-          }
-
+      async handleUserCurrentTest() {
+        await this.testStore.update() 
       }
+
 
     },
-    created(){
 
-      if(isUserLoggedIn()){
-        this.handleUserCurrentTest();
+    async created() {
+      if(isUserLoggedIn()) {
+
+        try{
+
+          await this.testStore.update();
+          
+        }catch(error){
+          console.log(error)
+        }
+
       }
-
     }
 
-  };
-
-
+  }
 
 </script>
+

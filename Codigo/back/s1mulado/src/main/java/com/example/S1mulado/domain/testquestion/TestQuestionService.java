@@ -22,17 +22,13 @@ public class TestQuestionService {
     private TestRepository testRepository;
 
 
-    public void validateAnswers(List<UpdateTestQuestionDTO> testQuestionsData) {
+    public void validateAnswers(List<TestQuestion> testQuestions) {
 
-        for (UpdateTestQuestionDTO testQuestionData : testQuestionsData) {
+        for (TestQuestion testQuestion : testQuestions) {
 
-            TestQuestion oldTestQuestion = testQuestionRepository.findById(testQuestionData.id())
-                    .orElseThrow((() -> new TestNotFoundException(String.format("test_question with id %s not found", testQuestionData.id()))));
+            testQuestion.setCorrect(testQuestion.getAnswer().equals(testQuestion.getQuestion().getCorrectAwnser()));
 
-            oldTestQuestion.setAnswer(testQuestionData.answer());
-            oldTestQuestion.setCorrect(oldTestQuestion.getAnswer().equals(oldTestQuestion.getQuestion().getCorrectAwnser()));
-
-            testQuestionRepository.save(oldTestQuestion);
+            testQuestionRepository.save(testQuestion);
 
         }
 
@@ -69,7 +65,6 @@ public class TestQuestionService {
         Test test = testQuestion.getTest();
         test.setUsedTime(LocalTime.parse(updateTestQuestionData.usedTime()));
         testRepository.save(test);
-
 
     }
 

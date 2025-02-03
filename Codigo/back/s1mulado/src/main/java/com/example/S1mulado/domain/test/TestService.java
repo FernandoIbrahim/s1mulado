@@ -73,6 +73,7 @@ public class TestService {
 
     public Test findById(Long id) {
 
+        System.out.println(id);
         return testRepository.findById(id)
                 .orElseThrow(() -> new TestNotFoundException(String.format("Test with id %s not found", id)));
 
@@ -91,25 +92,14 @@ public class TestService {
     }
 
 
-
-
-    public Test answerTest(Long id, UpdateTestDTO testData){
+    public Test finalize(Long id){
 
         Test test = findById(id);
-        LocalTime usedTime  = LocalTime.parse(testData.usedTime());
-        test.setUsedTime(usedTime);
+        test.setConcluded(true);
+        testQuestionService.validateAnswers(test.getTestQuestions());
+        testRepository.save(test);
 
-        testQuestionService.validateAnswers(testData.questionsAnswers());
-
-        return testRepository.save(test);
-
-    }
-
-    public void answerQuestion(Long id, UpdateTestQuestionDTO testQuestionData){
-
-
-        testQuestionService.answerQuestion(testQuestionData);
-
+        return test;
 
     }
 

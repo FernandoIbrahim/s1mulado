@@ -13,3 +13,10 @@ export const patchQuestionAnswer = async (testQuestion) => {
     return response;
 
 };
+
+export const finalizeTest = async (id) => {
+    const response = await API_JSON_CLIENT.post(`/tests/${id}/end`);
+
+    return response
+
+}
