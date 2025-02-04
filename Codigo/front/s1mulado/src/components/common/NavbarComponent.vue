@@ -15,7 +15,7 @@
               </li>
 
               <li>
-                  <IconButtonComponent content = "education" mainUrl = "/provas" title="Provas"/>
+                  <IconButtonComponent content = "education" mainUrl = "/tests" title="Provas"/>
               </li>
 
               <li>

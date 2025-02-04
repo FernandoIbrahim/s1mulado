@@ -17,3 +17,11 @@ export const getUserCurrentTest = async () => {
 };
 
 
+export const getUserTestResultHistory = async () => {
+
+    const response = await API_JSON_CLIENT.get("/users/me/test-history");
+
+    return response;
+
+};
+
