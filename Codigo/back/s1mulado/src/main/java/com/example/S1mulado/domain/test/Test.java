@@ -2,6 +2,7 @@ package com.example.S1mulado.domain.test;
 
 
 import com.example.S1mulado.domain.question.Question;
+import com.example.S1mulado.domain.subject.KnowledgeArea;
 import com.example.S1mulado.domain.testquestion.TestQuestion;
 import com.example.S1mulado.domain.user.User;
 import com.fasterxml.jackson.annotation.JsonBackReference;
@@ -36,6 +37,9 @@ public class Test {
     private Boolean concluded;
 
     private Long questionsNumber;
+
+    @Enumerated(EnumType.STRING)
+    private KnowledgeArea knowledgeArea;
 
     @OneToMany(mappedBy = "test")
     private List<TestQuestion> testQuestions;

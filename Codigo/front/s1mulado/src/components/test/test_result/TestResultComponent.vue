@@ -1,6 +1,6 @@
 <template>
 
-    <div class="  flex flex-col bg-white rounded-lg p-4 shadow-md hover:shadow-lg transition-shadow my-5 w-80/100 hover:scale-102">
+    <div class="  flex flex-col bg-white rounded-lg p-4 shadow-md hover:shadow-lg transition-shadow my-2 w-80/100 hover:scale-102">
       <div class="flex justify-between items-center mb-3">
 
         <span 
@@ -35,7 +35,7 @@
         
         <div class="text-center">
           <p class="text-gray-500 text-xs">Percentual</p>
-          <p class="text-sm font-semibold text-blue-600">
+          <p class="text-sm font-semibold" :class="selectPercentColor(calculatePercentage(testResult.correctAnswers, testResult.totalQuestions))" >
             {{ calculatePercentage(testResult.correctAnswers, testResult.totalQuestions) }}%
           </p>
         </div>
@@ -92,6 +92,18 @@
             return "HUMANAS";
             break;
         }
+      },
+
+      selectPercentColor(percentage){
+
+        if(percentage >= 80){
+          return "text-green-800";
+        }else if(percentage >= 50){
+          return "text-blue-800";
+        }else{
+          return "text-red-800";
+        }
+
       }
       
 

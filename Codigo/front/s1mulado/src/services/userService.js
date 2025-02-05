@@ -17,9 +17,18 @@ export const getUserCurrentTest = async () => {
 };
 
 
-export const getUserTestResultHistory = async () => {
+export const getUserTestResultHistory = async (pageable) => {
 
-    const response = await API_JSON_CLIENT.get("/users/me/test-history");
+    const params = {
+        page: pageable.page,
+        size: pageable.size,
+        sort: pageable.sort
+    };
+
+
+    const response = await API_JSON_CLIENT.get("/users/me/test-history", {
+        params: params
+    });
 
     return response;
 

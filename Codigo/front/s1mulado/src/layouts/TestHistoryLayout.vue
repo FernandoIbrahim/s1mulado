@@ -9,6 +9,8 @@
                     <TestResultComponent :testResult="testResult"/>
             </div>
 
+            <TestResultPaginationComponent :currentPage="currentPage" :maxPage="totalPages-1" @pageChange="updatedCurrentPage" class="mt-4"/>
+
         </div>
     </div>
 </template>
@@ -17,26 +19,31 @@
 
 import {  getUserTestResultHistory } from "@/services/userService";
 
-import TestResultComponent from "@/components/test/TestResultComponent.vue";
+import TestResultComponent from "@/components/test/test_result/TestResultComponent.vue";
+import TestResultPaginationComponent from "@/components/test/test_result/TestResultPaginationComponent.vue";
 
 export default {
 
     data(){
         return{
-            testResults: null
+            totalPages: null,
+            testResults: null, 
+            currentPage: 1
         }
     },
     components:{
-        TestResultComponent
+        TestResultComponent,
+        TestResultPaginationComponent
     },
+
     async created(){
 
         try{
 
-            const response = await getUserTestResultHistory();
-            this.testResults = response.data;
-
-            console.log(this.testResults);
+            const response = await getUserTestResultHistory({ page: 0, size: 4, sort: null });
+            this.testResults = response.data.content;
+            this.totalPages = response.data.totalPages
+            console.log(this.totalPages);
             
         }catch(error){
 
@@ -44,7 +51,20 @@ export default {
 
         }
 
+    },
+    methods: {
+
+        async updatedCurrentPage(newPage){
+
+            console.log(newPage);
+            this.currentPage = newPage - 1
+            const response = await getUserTestResultHistory({ page: this.currentPage, size: 4, sort: null });
+            this.testResults = response.data.content;
+
+        }   
+
     }
+
 
 }
 

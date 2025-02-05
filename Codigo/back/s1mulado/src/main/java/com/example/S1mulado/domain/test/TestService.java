@@ -53,6 +53,7 @@ public class TestService {
         newTest.setQuestionsNumber(testData.getQuestionsNumber());
         newTest.setDate(LocalDateTime.now());
         newTest.setConcluded(false);
+        newTest.setKnowledgeArea(testData.getKnowledgeArea());
         newTest.setUser(user);
 
         return testRepository.save(newTest);
