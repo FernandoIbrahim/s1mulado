@@ -59,7 +59,8 @@ export default {
     v-slot="{ page, items }" 
     :page="currentPage" 
     @update:page="handlePageChange" 
-    :total="100" 
+    :total="maxPage*4" 
+    :items-per-page="4"
     :sibling-count="1" 
     show-edges
   >

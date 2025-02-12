@@ -9,7 +9,7 @@
                     <TestResultComponent :testResult="testResult"/>
             </div>
 
-            <TestResultPaginationComponent :currentPage="currentPage" :maxPage="totalPages-1" @pageChange="updatedCurrentPage" class="mt-4"/>
+            <TestResultPaginationComponent :currentPage="currentPage" :maxPage="totalPages" @pageChange="updatedCurrentPage" class="mt-4"/>
 
         </div>
     </div>
@@ -42,7 +42,7 @@ export default {
 
             const response = await getUserTestResultHistory({ page: 0, size: 4, sort: null });
             this.testResults = response.data.content;
-            this.totalPages = response.data.totalPages
+            this.totalPages = response.data.totalPages;
             console.log(this.totalPages);
             
         }catch(error){

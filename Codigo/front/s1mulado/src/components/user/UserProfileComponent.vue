@@ -8,6 +8,7 @@
                 <p class="text-gray-800 text-xs">{{ user.email }}</p>
 
             </div>
+            
 
         </div>
     </div>
