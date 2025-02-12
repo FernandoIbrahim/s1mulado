@@ -1,11 +1,11 @@
 import { createWebHistory, createRouter } from "vue-router"
 
-import CreateTestComponent from "@/components/test/CreateTestComponent.vue"
+import CreateTestLayout from "@/layouts/CreateTestLayout.vue"
 import UserProfileComponent from "@/components/user/UserProfileComponent.vue"
 import TestHistoryLayout from "@/layouts/TestHistoryLayout.vue"
 
 const routes = [
-  { path: "/", component: CreateTestComponent },
+  { path: "/", component: CreateTestLayout },
   { path: "/profile", component: UserProfileComponent},
   { path: "/tests", component: TestHistoryLayout}
 ]

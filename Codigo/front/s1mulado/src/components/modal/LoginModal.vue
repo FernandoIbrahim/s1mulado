@@ -43,7 +43,6 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Input as ShadIput} from '@/components/ui/input'
 import  ButtonComponent  from '@/components/common/ButtonComponent.vue'
 import { login, register } from '@/services/authService.js'
-import CreateTestComponent from '@/components/test/CreateTestComponent.vue';
 
 
 export default{

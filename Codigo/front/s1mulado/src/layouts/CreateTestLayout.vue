@@ -25,14 +25,13 @@
   import { useLoginModal } from '@/stores/modals.js'
 
   import { isUserLoggedIn } from '@/services/authService.js'
-  import { getUserCurrentTest } from '@/services/userService.js'
   import {create} from '@/services/testService';
 
   import { useCurrentTestStore } from '@/stores/currentTest'
 
   import SelectMenu from '@/components/common/SelectMenu.vue'
   import ButtonComponent from '@/components/common/ButtonComponent.vue'
-  import Test from '@/components/test/Test.vue';
+  import Test from '@/components/test/TestComponent.vue';
   import LoginModal from '@/components/modal/LoginModal.vue';
 
 
