@@ -16,3 +16,21 @@ export const useLoginModal = defineStore("loginModal", {
   },
 
 })
+
+
+export const useCompletedTest = defineStore("completedTest", {
+  state: () => {
+    return { active: false }
+  },
+
+  actions: {
+    open() {
+      this.active = true;
+    },
+
+    close() {
+        this.active = false;
+    },
+  },
+
+})
