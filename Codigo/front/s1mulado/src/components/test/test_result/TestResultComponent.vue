@@ -1,6 +1,6 @@
 <template>
 
-    <div class="  flex flex-col bg-white rounded-lg p-4 shadow-md hover:shadow-lg transition-shadow my-2 w-80/100 hover:scale-102">
+    <div class="  flex flex-col bg-white rounded-lg p-4 shadow-md hover:shadow-xl  transition-shadow my-2 w-80/100 hover:scale-102 border-freshAir border hover:border-0">
       <div class="flex justify-between items-center mb-3">
 
         <span 

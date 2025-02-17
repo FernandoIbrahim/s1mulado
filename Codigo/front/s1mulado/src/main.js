@@ -4,7 +4,7 @@ import router from "./router"
 import App from "./App.vue"
 import { createPinia } from "pinia"
 import Toast, {POSITION} from "vue-toastification";
-import "vue-toastification/dist/index.css";
+import "vue-toastification/dist/index.css"; 
 
 const pinia = createPinia();
 

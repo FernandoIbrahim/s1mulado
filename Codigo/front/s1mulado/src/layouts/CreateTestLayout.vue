@@ -1,9 +1,9 @@
 <template>
 
-    <div class="w-full h-full bg-white fex fex-column">
+    <div class="w-full h-full bg-white fex fex-column mt-10">
 
       <header class="flex flex-row justify-between items-center  h-20 w-full bg-white">
-        <ButtonComponent @click="createTest" > Iniciar </ButtonComponent>
+        <ButtonComponent @click="createTest" padding-x="8" padding-y="2" class="transition duration-100 hover:scale-102 hover:-translate-y-1"> Iniciar </ButtonComponent>
 
         <SelectMenu v-model="selectedArea" title="Área do conhecimento:" :options="this.options" />
 

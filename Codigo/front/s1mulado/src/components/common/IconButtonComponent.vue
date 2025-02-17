@@ -11,7 +11,7 @@
                 <use :href="`/icons/icons.svg#${content}`" />
             </svg>
 
-            <p class="text-xs" :class="buttonTextColor">{{title}}</p>
+            <p class="text-xs font-inter font-semibold" :class="buttonTextColor">{{title}}</p>
 
         </button>
 
@@ -52,10 +52,10 @@ export default {
             return this.mainUrl === this.currentPath;
         },
         buttonIconStyle() {
-            return this.isHovering ? 'black' : '#6b7280';
+            return this.isHovering ? 'midnight' : 'midnight';
         },
         buttonTextColor(){
-            return this.isHovering ? 'text-black' : 'text-gray-500';
+            return this.isHovering ? 'text-midnight' : 'text-midnight';
         }
     },
     methods: {

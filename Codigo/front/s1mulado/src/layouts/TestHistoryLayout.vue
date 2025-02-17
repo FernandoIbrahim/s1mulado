@@ -1,15 +1,15 @@
 <template>
     <div class="flex flex-col w-full items-center">
         <div class="h-30 items-end flex flex-row w-ful justify-center">
-            <h1 class="text-lg font-bold text-gray-500 mb-6">Provas anteriores</h1>
+            <h1 class="text-lg font-bold text-midnight mb-6">Provas anteriores</h1>
         </div>
-        <div class=" h-full bg-gray-100 w-80/100 flex items-center flex-col rounded-md">
+        <div class=" h-full w-80/100 flex items-center flex-col rounded-md">
 
             <div  v-if="testResults != null" v-for="(testResult, index) in testResults" :key="testResult.id"  class=" flex flex-col w-full items-center pt-10">
                     <TestResultComponent :testResult="testResult"/>
             </div>
 
-            <TestResultPaginationComponent :currentPage="currentPage" :maxPage="totalPages" @pageChange="updatedCurrentPage" class="mt-4"/>
+            <TestResultPaginationComponent :currentPage="currentPage" :maxPage="totalPages" @pageChange="updatedCurrentPage" class="mt-15"/>
 
         </div>
     </div>

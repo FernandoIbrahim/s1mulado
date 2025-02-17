@@ -3,3 +3,14 @@
 .button-icon-color-change {
   background-color: black;
 }
+
+@theme {
+  --color-midnight: #171717;
+  --color-freshAir: #e4e6f1
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("./fonts/Inter/Inter-VariableFont_opsz,wght.ttf") format("truetype");
+  font-weight: 100 900;
+}

@@ -66,11 +66,11 @@ export default {
   >
     <PaginationList class="flex items-center gap-1" @click="$emit('pageChange', currentPage)">
 
-      <PaginationFirst />
-      <PaginationPrev />
+      <PaginationFirst class="bg-midnight text-white"/>
+      <PaginationPrev  class="bg-midnight text-white"/>
 
-      <PaginationNext />
-      <PaginationLast />
+      <PaginationNext  class="bg-midnight text-white"/>
+      <PaginationLast  class="bg-midnight text-white"/>
       
     </PaginationList>
 
