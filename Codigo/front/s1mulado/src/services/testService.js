@@ -20,3 +20,13 @@ export const finalizeTest = async (id) => {
     return response
 
 }
+
+
+export const findTestById = async (id) => {
+
+    const response = await API_JSON_CLIENT.get(`/tests/${id}`);
+
+    return response
+
+}
+

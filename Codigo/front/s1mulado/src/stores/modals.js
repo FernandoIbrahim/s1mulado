@@ -1,5 +1,7 @@
 import { defineStore } from "pinia"
 
+import { findTestById} from "@/services/testService";
+
 export const useLoginModal = defineStore("loginModal", {
   state: () => {
     return { active: false }
@@ -18,19 +20,28 @@ export const useLoginModal = defineStore("loginModal", {
 })
 
 
-export const useCompletedTest = defineStore("completedTest", {
+export const useCompletedTestResult = defineStore("useCompletedTestResult", {
   state: () => {
-    return { active: false }
+    return {
+       active: false,
+       testData: null
+      }
   },
 
   actions: {
-    open() {
-      this.active = true;
-    },
 
-    close() {
-        this.active = false;
+    async open(testId) {
+
+      this.testData = (await findTestById(testId)).data;
+      this.active = true;
+
     },
+    close() {
+
+        this.active = false;
+        
+    },
+    
   },
 
 })

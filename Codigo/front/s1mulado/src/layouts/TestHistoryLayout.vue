@@ -6,21 +6,29 @@
         <div class=" h-full w-80/100 flex items-center flex-col rounded-md">
 
             <div  v-if="testResults != null" v-for="(testResult, index) in testResults" :key="testResult.id"  class=" flex flex-col w-full items-center pt-10">
-                    <TestResultComponent :testResult="testResult"/>
+
+                <TestResultComponent :testResult="testResult" @click="handleTestOpen(testResult.id)"/>
+
             </div>
 
             <TestResultPaginationComponent :currentPage="currentPage" :maxPage="totalPages" @pageChange="updatedCurrentPage" class="mt-15"/>
 
         </div>
+
+        <TestResultModal v-if="this.completedTestResultModal.active"/>
+
     </div>
 </template>
 
 <script>
 
-import {  getUserTestResultHistory } from "@/services/userService";
+import { getUserTestResultHistory } from "@/services/userService";
+import { useCompletedTestResult } from '@/stores/modals.js'
 
 import TestResultComponent from "@/components/test/test_result/TestResultComponent.vue";
 import TestResultPaginationComponent from "@/components/test/test_result/TestResultPaginationComponent.vue";
+
+import TestResultModal from "@/components/modal/TestResultModal.vue";
 
 export default {
 
@@ -28,12 +36,14 @@ export default {
         return{
             totalPages: null,
             testResults: null, 
-            currentPage: 1
+            currentPage: 1,
+            completedTestResultModal: useCompletedTestResult()
         }
     },
     components:{
         TestResultComponent,
-        TestResultPaginationComponent
+        TestResultPaginationComponent,
+        TestResultModal
     },
 
     async created(){
@@ -61,7 +71,11 @@ export default {
             const response = await getUserTestResultHistory({ page: this.currentPage, size: 4, sort: null });
             this.testResults = response.data.content;
 
-        }   
+        },
+        
+        async handleTestOpen(testId){
+            await this.completedTestResultModal.open(testId);
+        }
 
     }
 
