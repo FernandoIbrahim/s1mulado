@@ -8,7 +8,7 @@
               </div>
           </div>
           
-          <TestComponent :test="completedTestResultStore.testData"/>
+          <TestComponent :test="testResultStore.testData"/>
       </div>
   </div>
 </template>
@@ -27,14 +27,14 @@ export default{
   data(){
 
     return {
-      completedTestResultStore: useCompletedTestResult(),
+      testResultStore: useCompletedTestResult(),
     }
 
   },
   methods: {
 
     async handleExitModal(){
-      this.completedTestResultStore.close();
+      this.testResultStore.close();
     },
 
     async getTestData(){

@@ -15,7 +15,7 @@
 
         </div>
 
-        <TestResultModal v-if="this.completedTestResultModal.active"/>
+        <TestResultModal v-if="this.testResultStore.active"/>
 
     </div>
 </template>
@@ -37,7 +37,7 @@ export default {
             totalPages: null,
             testResults: null, 
             currentPage: 1,
-            completedTestResultModal: useCompletedTestResult()
+            testResultStore: useCompletedTestResult()
         }
     },
     components:{
@@ -74,7 +74,7 @@ export default {
         },
         
         async handleTestOpen(testId){
-            await this.completedTestResultModal.open(testId);
+            await this.testResultStore.open(testId);
         }
 
     }

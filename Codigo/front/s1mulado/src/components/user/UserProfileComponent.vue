@@ -6,15 +6,16 @@
 
                 <p class="text-gray-800">{{ user.username }}</p>
                 <p class="text-gray-800 text-xs">{{ user.email }}</p>
-
+                
             </div>
-            
+            <TestResultChart />
 
         </div>
     </div>
 </template>
 
 <script>
+    import TestResultChart from '@/components/charts/TestResultChart.vue'
     import { getUserData }  from '@/services/userService'
     
     export default {
@@ -40,6 +41,9 @@
                 }
             }
 
+        },
+        components: {
+            TestResultChart
         },
         created(){
 
