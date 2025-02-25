@@ -75,7 +75,7 @@
 
         try {
           await create({ 
-            "questionsNumber": 2, 
+            "questionsNumber": 10, 
             "knowledgeArea": "NATURE"
           })
           await this.testStore.update() // Atualiza a store após criar

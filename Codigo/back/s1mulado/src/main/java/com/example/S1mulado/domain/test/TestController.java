@@ -62,17 +62,6 @@ public class TestController {
 
     }
 
-    /*
-     Atualiza o tempo da realização do teste e as respostas.
-    @PatchMapping("/test/{id}")
-    public ResponseEntity<Test> answeringTest(@PathVariable Long id, @RequestBody UpdateTestDTO updateTestDTO) {
-
-        Test test = testService.answerTest(id, updateTestDTO);
-
-        return ResponseEntity.ok(test);
-
-    }
-    */
 
     @PostMapping("/tests/{id}/end")
     public ResponseEntity<Test> finalizeTest(@PathVariable Long id, @AuthenticationPrincipal UserDetails userDetails) {
