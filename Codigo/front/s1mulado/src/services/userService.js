@@ -17,12 +17,13 @@ export const getUserCurrentTest = async () => {
 };
 
 
-export const getUserTestResultHistory = async (pageable) => {
+export const getUserTestResultHistory = async (paramsData) => {
 
     const params = {
-        page: pageable.page,
-        size: pageable.size,
-        sort: pageable.sort
+        page: paramsData.page,
+        size: paramsData.size,
+        sort: paramsData.sort,
+        knowledgeArea: paramsData.knowledgeArea
     };
 
 

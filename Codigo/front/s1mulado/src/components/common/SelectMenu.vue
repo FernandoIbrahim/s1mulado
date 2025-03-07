@@ -41,5 +41,7 @@ const props = defineProps({
   },
 })
 
-const selected = ref(props.options[0]) // This will automatically update through v-model
+
+const selected = ref(props.options[1]) // This will automatically update through v-model
+
 </script>

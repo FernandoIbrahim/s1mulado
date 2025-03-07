@@ -13,7 +13,7 @@ export default {
   methods: {
 
     async getChartData(){
-        const response = await getUserTestResultHistory({ page: 0, size: 100, sort: null });
+        const response = await getUserTestResultHistory({ page: 0, size: 100, sort: 'desc', knowledgeArea: 'NATURE'});
         const results = response.data.content;
         console.log(results)
         this.convertResult(results);
