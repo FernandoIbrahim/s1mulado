@@ -3,7 +3,7 @@
       <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-[90%] max-h-[90vh] overflow-auto sm:min-w-[400px] md:min-w-[600px] lg:min-w-[700px]">
           
           <div class="w-full flex justify-end p-2">
-              <div class="w-9 h-9 flex items-center">
+              <div class="w-9 h-9 flex items-center fixed">
                   <ButtonComponent class="w-full flex" @click="handleExitModal" padding-x="1" padding-y="1">X</ButtonComponent> 
               </div>
           </div>

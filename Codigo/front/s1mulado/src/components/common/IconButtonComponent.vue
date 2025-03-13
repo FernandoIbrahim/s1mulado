@@ -7,7 +7,7 @@
             @mouseover= "isHovering = true" @mouseout="isHovering = false"
             >
             <!-- <span class="material-symbols-outlined prevent-select"> {{ content }} </span> -->
-            <svg class="w-7 h-7 justify-center items-center p-0.5" :fill="buttonIconStyle" >
+            <svg class="w-7 h-7 p-0.5 block mx-auto" :fill="buttonIconStyle">
                 <use :href="`/icons/icons.svg#${content}`" />
             </svg>
 

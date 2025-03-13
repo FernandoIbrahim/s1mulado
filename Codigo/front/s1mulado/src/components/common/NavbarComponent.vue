@@ -19,7 +19,7 @@
               </li>
 
               <li>
-                  <IconButtonComponent content = "work" mainUrl = "/profile" title="Perfil"/>
+                  <IconButtonComponent content = "profile" mainUrl = "/profile" title="Perfil"/>
               </li>
           </ul>
       </div>

@@ -13,8 +13,8 @@
 
         <div v-if="selectedKnowledgeArea != null">
             <div class="mt-40">
-                <h1 class="text-md  midnight w-full flex justify-center">Acertos</h1>
-                <TestResultChart class="mt-5"/>
+                <h1 class="text-md  midnight w-full flex justify-center">Últimas Provas</h1>
+                <TestResultChart class="mt-5" :knowledgeArea="selectedKnowledgeArea"/>
             </div>
         </div>
 

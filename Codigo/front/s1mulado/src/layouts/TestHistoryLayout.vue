@@ -1,12 +1,15 @@
 <template>
-    <div class="flex flex-col w-full items-center">
-        <div class="h-30  flex flex-row w-ful justify-between items-center w-80/100">
-            
-            <h1 class="text-lg font-bold text-midnight flex">Provas anteriores</h1>
+    <div class="flex flex-col w-full items-center mt-15">
 
-            <SelectMenu v-model="selectedArea" title="Área do conhecimento:" :options="this.options"/>
+        <div class="h-16 flex justify-between items-center w-full px-6 bg-white">
+            <h1 class="text-lg font-bold text-midnight">Provas anteriores</h1>
 
+            <div class="flex items-center gap-x-4">
+                <SelectMenu v-model="selectedArea" title="Área do conhecimento:" :options="options"/>
+                <IconButtonComponent content="filter" title="Filtro"/>
+            </div>
         </div>
+
         <div class=" h-full w-80/100 flex items-center flex-col rounded-md">
 
             <div  v-if="testResults != null" v-for="(testResult, index) in testResults" :key="testResult.id"  class=" flex flex-col w-full items-center pt-10">
@@ -25,17 +28,20 @@
 </template>
 
 <script>
-
+import { getKnowledgeArea } from "@/services/knowledgeAreaService"
 import { getUserTestResultHistory } from "@/services/userService";
+
 import { useCompletedTestResult } from '@/stores/modals.js'
+import { useTestResultHistoryFilter } from '@/stores/searchFilter.js';
 
 import TestResultComponent from "@/components/test/test_result/TestResultComponent.vue";
 import TestResultPaginationComponent from "@/components/test/test_result/TestResultPaginationComponent.vue";
 import SelectMenu from "@/components/common/SelectMenu.vue";
+import IconButtonComponent from "@/components/common/IconButtonComponent.vue";
 
 import TestResultModal from "@/components/modal/TestResultModal.vue";
 
-import { getKnowledgeArea } from "@/services/knowledgeAreaService"
+
 
 export default {
 
@@ -46,6 +52,7 @@ export default {
             testResults: null, 
             currentPage: 1,
             testResultStore: useCompletedTestResult(),
+            testResultHistoryFilter: useTestResultHistoryFilter(),
             options: [
                 { id: 1, name: 'Exatas' },
                 { id: 2, name: 'Natureza' },
@@ -60,7 +67,8 @@ export default {
         TestResultComponent,
         TestResultPaginationComponent,
         TestResultModal,
-        SelectMenu
+        SelectMenu,
+        IconButtonComponent
     },
 
     async created(){
@@ -87,11 +95,19 @@ export default {
 
         async handleTestHistory(page){
 
-            const response = await getUserTestResultHistory({ page: page, size: 4, sort: null, knowledgeArea: getKnowledgeArea(this.selectedArea.id)});
-            this.testResults = response.data.content;
-            this.totalPages = response.data.totalPages;
-            console.log(this.totalPages);
+            const response = await getUserTestResultHistory(
+                { 
+                    page: page, 
+                    size: 4, 
+                    sort: null, 
+                    knowledgeArea: getKnowledgeArea(this.testResultHistoryFilter.knowledgeArea.id), 
+                    minDate: this.testResultHistoryFilter.minDate, 
+                    maxDate: this.testResultHistoryFilter.maxDate
+                }
+            );
 
+            this.totalPages = response.data.totalPages;
+            this.testResults = response.data.content;
         },
 
         async updatedCurrentPage(newPage){
@@ -105,9 +121,9 @@ export default {
     },
     watch: {
 
-        async selectedArea(oldSelectedArea, newSelectedArea){
-            
+        async selectedArea(newSelectedArea, oldSelectedArea){   
             this.currentPage = 0;
+            await this.testResultHistoryFilter.setKnowledgeArea(newSelectedArea)
             await this.handleTestHistory(0);
 
         }
