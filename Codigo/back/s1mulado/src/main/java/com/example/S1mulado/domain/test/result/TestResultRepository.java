@@ -1,6 +1,7 @@
 package com.example.S1mulado.domain.test.result;
 
 import com.example.S1mulado.domain.subject.KnowledgeArea;
+import com.example.S1mulado.domain.test.result.dto.TestResultFilter;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
@@ -18,7 +19,7 @@ public class TestResultRepository {
     @PersistenceContext
     private EntityManager entityManager;
 
-    public Page<TestResultDTO> findTestResultHistory(Long userId, Pageable pageable) {
+    public Page<TestResultDTO> findTestResultHistory(Long userId, TestResultFilter testResultFilter, Pageable pageable) {
 
         String sql = """
             SELECT 
@@ -31,17 +32,21 @@ public class TestResultRepository {
                 t.knowledge_area
             FROM tests t
             INNER JOIN test_question tq ON t.id = tq.test_id
-            WHERE t.user_id = :userId AND t.concluded = true
+            WHERE t.user_id = :userId 
+                AND t.concluded = true
+                    AND t.date BETWEEN COALESCE(:startDate, t.date) AND COALESCE(:endDate, t.date)
+                AND (:knowledgeArea IS NULL OR t.knowledge_area = :knowledgeArea ::varchar)
             GROUP BY t.id
             ORDER BY t.date DESC
         """;
 
         Query query = entityManager.createNativeQuery(sql)
                 .setParameter("userId", userId)
+                .setParameter("startDate", testResultFilter.getMinDate())
+                .setParameter("endDate", testResultFilter.getMaxDate())
+                .setParameter("knowledgeArea", testResultFilter.getKnowledgeArea().toString())
                 .setFirstResult((int) pageable.getOffset())
                 .setMaxResults(pageable.getPageSize());
-
-
 
         List<Object[]> results = query.getResultList();
 
@@ -56,16 +61,23 @@ public class TestResultRepository {
         )).toList();
 
         String countSql = """
-            SELECT COUNT(DISTINCT t.id) 
-            FROM tests t
-            WHERE t.user_id = :userId AND t.concluded = true
+                SELECT COUNT(DISTINCT t.id)\s
+                FROM tests t
+                WHERE t.user_id = :userId
+                    AND t.concluded = true
+                    AND t.date >= COALESCE(:startDate, t.date)
+                    AND t.date <= COALESCE(:endDate, t.date)
+                    AND (:knowledgeArea IS NULL OR t.knowledge_area = :knowledgeArea ::varchar)
         """;
 
         Query countQuery = entityManager.createNativeQuery(countSql)
-                .setParameter("userId", userId);
+                .setParameter("userId", userId)
+                .setParameter("startDate", testResultFilter.getMinDate())
+                .setParameter("endDate", testResultFilter.getMaxDate())
+                .setParameter("knowledgeArea", testResultFilter.getKnowledgeArea().toString());
 
         long total = ((Number) countQuery.getSingleResult()).longValue();
-
+        System.out.println(total);
         return new PageImpl<TestResultDTO>(testResults, pageable, total);
 
     }

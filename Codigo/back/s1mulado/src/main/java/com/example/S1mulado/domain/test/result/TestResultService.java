@@ -1,5 +1,6 @@
 package com.example.S1mulado.domain.test.result;
 
+import com.example.S1mulado.domain.test.result.dto.TestResultFilter;
 import com.example.S1mulado.domain.user.User;
 import com.example.S1mulado.domain.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,11 +21,11 @@ public class TestResultService {
     @Autowired
     private UserService userService;
 
-    public Page<TestResultDTO> getTestHistory(UserDetails userDetails, Pageable pageable) {
+    public Page<TestResultDTO> getTestHistory(UserDetails userDetails, TestResultFilter testResultFilter, Pageable pageable) {
 
         User user = userService.findLoggedUser(userDetails);
 
-        return testResultRepository.findTestResultHistory(user.getId(), pageable);
+        return testResultRepository.findTestResultHistory(user.getId(), testResultFilter ,pageable);
 
     }
 
