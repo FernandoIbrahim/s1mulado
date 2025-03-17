@@ -49,7 +49,33 @@ export default {
           .attr("height", height + margin * 2)
           .append("g")
           .attr("transform", `translate(${margin}, ${margin})`);
-        
+
+        d3.select("#chart svg")
+          .append("text")
+          .attr("transform", `translate(${margin/5}, ${margin + height/2}) rotate(-90)`)
+          .style("text-anchor", "middle")
+          .style("font-family", "sans-serif")
+          .style("font-size", "12px")
+          .text("Número de Acertos");
+
+        d3.select("#chart svg")
+          .append("text")
+          .attr("transform", `translate(${margin + width/2}, ${height + margin + 40})`)
+          .style("text-anchor", "middle")
+          .style("font-family", "sans-serif")
+          .style("font-size", "12px")
+          .text("Data das Provas (Tempo)");
+
+        // Legenda para as bolinhas (provas)
+        d3.select("#chart svg")
+          .append("text")
+          .attr("transform", `translate(${margin + width - 120}, ${margin/2})`)
+          .style("text-anchor", "start")
+          .style("font-family", "sans-serif")
+          .style("font-size", "12px")
+          .text("● -> Prova Realizada");
+
+
         const xScale = d3.scaleTime()
           .domain(d3.extent(this.chartData, d => d.date))
           .range([0, width]);

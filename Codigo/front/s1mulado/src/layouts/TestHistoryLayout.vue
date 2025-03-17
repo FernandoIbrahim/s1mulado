@@ -158,7 +158,7 @@ export default {
         async selectedArea(newSelectedArea, oldSelectedArea){   
             this.currentPage = 0;
             await this.testResultHistoryFilter.setKnowledgeArea(newSelectedArea);
-            await this.handleTestHistory(0);
+            await this.handleTestHistory(this.currentPage);
         },
 
         'testResultHistoryFilter.minDate': {

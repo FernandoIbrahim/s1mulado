@@ -5,7 +5,8 @@ import { Button } from '@/components/ui/button'
 import { Calendar } from '@/components/ui/calendar'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import { CalendarIcon } from 'lucide-vue-next'
-import { DateFormatter, getLocalTimeZone, CalendarDate } from '@internationalized/date'
+import { DateFormatter, getLocalTimeZone, CalendarDate, parseDate } from '@internationalized/date'
+
 
 const df = new DateFormatter('en-US', { dateStyle: 'long' })
 
@@ -13,10 +14,16 @@ const props = defineProps({
   dataPickerName: {
     type: String,
     required: true,
+  },
+  modelValue: {
+    type: [Date, null],
+    required: true
   }
+
 })
 
-const value = ref(null)
+
+const value = ref(props.modelValue ? parseDate(props.modelValue.toISOString().split('T')[0]) : null);
 
 const emit = defineEmits(['update:modelValue'])
   
@@ -37,7 +44,7 @@ watch(value, (newVal) => {
         )"
       >
         <CalendarIcon class="mr-2 h-4 w-4" />
-        {{ value ? df.format(value.toDate(getLocalTimeZone())) : dataPickerName }}
+        {{ props.modelValue ? df.format(value.toDate(getLocalTimeZone())) : dataPickerName }}
       </Button>
     </PopoverTrigger>
     <PopoverContent class="w-auto p-0">

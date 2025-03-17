@@ -12,6 +12,7 @@ import {
 
 import IconButtonComponent from "@/components/common/IconButtonComponent.vue";
 import DataPicker from "@/components/ui/data-picker/DataPicker.vue";
+import ButtonComponent from "@/components/common/ButtonComponent.vue";
 
 export default{
     name: "TestResultFilterPopouver",
@@ -20,28 +21,45 @@ export default{
         Popover,
         PopoverContent,
         PopoverTrigger, 
-        DataPicker
+        DataPicker,
+        ButtonComponent
     },
     data(){
       return {
-        testResultHistoryFilter: useTestResultHistoryFilter(),
-        startDate: null,
-        endDate: null
+        testResultHistoryFilter: useTestResultHistoryFilter()
       }
     },
-    watch: {
-
-      startDate(newStartDate, oldStartDate){
-        this.testResultHistoryFilter.setMinDate(newStartDate);
-        console.log('alterando data minima');
+    computed: {
+      startDate: {
+        get() {
+          if(!this.testResultHistoryFilter.minDate) return null
+          return this.testResultHistoryFilter.minDate
+        },
+        set(value) {
+          this.testResultHistoryFilter.setMinDate(value)
+        }
       },
+      endDate: {
+        get() {
+          if(!this.testResultHistoryFilter.maxDate) 
+            return null
+          return this.testResultHistoryFilter.maxDate
+        },
+        set(value) {
+          this.testResultHistoryFilter.setMaxDate(value)
+        }
+      }
+    },
+    methods: {
 
-      endDate(newEndDate, oldEndDate){
-        this.testResultHistoryFilter.setMaxDate(newEndDate);
-        console.log('alterando data maxima');
+      cleanFiltersHanddler(){
+        this.testResultHistoryFilter.setMaxDate(null);
+        this.testResultHistoryFilter.setMinDate(null);
+        this.$forceUpdate();
       }
 
     }
+    
 }
 
 </script>
@@ -58,6 +76,9 @@ export default{
       </div>
       <div class="my-5">
         <DataPicker v-model="endDate" dataPickerName="Data de fim" />
+      </div>
+      <div class="my-5">
+        <ButtonComponent padding-x="5" padding-y="1" :onclick="cleanFiltersHanddler">Limpar Filtros</ButtonComponent>
       </div>
     </PopoverContent>
   </Popover>
