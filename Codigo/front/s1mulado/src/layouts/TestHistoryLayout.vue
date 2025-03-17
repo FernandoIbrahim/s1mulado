@@ -6,7 +6,7 @@
 
             <div class="flex items-center gap-x-4">
                 <SelectMenu v-model="selectedArea" title="Área do conhecimento:" :options="options"/>
-                <IconButtonComponent content="filter" title="Filtro"/>
+                <TestResultFilterPopouver/>
             </div>
         </div>
 
@@ -37,7 +37,7 @@ import { useTestResultHistoryFilter } from '@/stores/searchFilter.js';
 import TestResultComponent from "@/components/test/test_result/TestResultComponent.vue";
 import TestResultPaginationComponent from "@/components/test/test_result/TestResultPaginationComponent.vue";
 import SelectMenu from "@/components/common/SelectMenu.vue";
-import IconButtonComponent from "@/components/common/IconButtonComponent.vue";
+import TestResultFilterPopouver from '@/components/test/test_result/TestResultFilterPopouver.vue';
 
 import TestResultModal from "@/components/modal/TestResultModal.vue";
 
@@ -59,7 +59,9 @@ export default {
                 { id: 3, name: 'Humanas' },
                 { id: 4, name: 'Linguagens'}
             ],
-            selectedArea: { id: 2, name: 'Natureza' }
+            selectedArea: { id: 2, name: 'Natureza' },
+            minDate: null,
+            maxDate: null,
 
         }
     },
@@ -68,7 +70,7 @@ export default {
         TestResultPaginationComponent,
         TestResultModal,
         SelectMenu,
-        IconButtonComponent
+        TestResultFilterPopouver
     },
 
     async created(){
@@ -86,7 +88,31 @@ export default {
     },
     methods: {
 
-        
+        formatDateToCustomISO(dateString) {
+
+          if(isNaN(dateString)){
+            console.log("NULL")
+            return null
+          }
+
+          const date = new Date(dateString);
+
+          if (isNaN(date)) {
+            throw new Error('Data inválida.');
+          }
+      
+          const year = date.getFullYear();
+          const month = String(date.getMonth() + 1).padStart(2, '0'); // Janeiro = 1
+          const day = String(date.getDate()).padStart(2, '0');
+          const hours = String(date.getHours()).padStart(2, '0');
+          const minutes = String(date.getMinutes()).padStart(2, '0');
+          const seconds = String(date.getSeconds()).padStart(2, '0');
+      
+          console.log(`${year}-${month}-${day}T${hours}:${minutes}:${seconds}`)
+          return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}`;
+
+        },
+
         async handleTestOpen(testId){
 
             await this.testResultStore.open(testId);
@@ -95,19 +121,27 @@ export default {
 
         async handleTestHistory(page){
 
-            const response = await getUserTestResultHistory(
-                { 
-                    page: page, 
-                    size: 4, 
-                    sort: null, 
-                    knowledgeArea: getKnowledgeArea(this.testResultHistoryFilter.knowledgeArea.id), 
-                    minDate: this.testResultHistoryFilter.minDate, 
-                    maxDate: this.testResultHistoryFilter.maxDate
-                }
-            );
+            const minDate = this.testResultHistoryFilter.minDate 
+              ? this.formatDateToCustomISO(this.testResultHistoryFilter.minDate)
+              : null;
+
+            const maxDate = this.testResultHistoryFilter.maxDate 
+              ? this.formatDateToCustomISO(this.testResultHistoryFilter.maxDate)
+              : null;
+
+            const response = await getUserTestResultHistory({
+                page: page,
+                size: 4,
+                sort: null,
+                knowledgeArea: getKnowledgeArea(this.testResultHistoryFilter.knowledgeArea?.id),
+                minDate: minDate,
+                maxDate: maxDate
+            });
 
             this.totalPages = response.data.totalPages;
             this.testResults = response.data.content;
+            console.log(this.testResults);
+            
         },
 
         async updatedCurrentPage(newPage){
@@ -123,10 +157,27 @@ export default {
 
         async selectedArea(newSelectedArea, oldSelectedArea){   
             this.currentPage = 0;
-            await this.testResultHistoryFilter.setKnowledgeArea(newSelectedArea)
+            await this.testResultHistoryFilter.setKnowledgeArea(newSelectedArea);
             await this.handleTestHistory(0);
+        },
 
+        'testResultHistoryFilter.minDate': {
+          async handler(newMinDate) {
+            console.log('MIN DATE ATUALIZADA:', newMinDate);
+            await this.handleTestHistory(0);
+          },
+          deep: true
+        },
+
+        'testResultHistoryFilter.maxDate': {
+            async handler(newMaxDate) {
+            console.log('MAX DATE ATUALIZADA:', newMaxDate);
+            await this.handleTestHistory(0);
+          },
+          deep: true
         }
+
+        
         
     }
 

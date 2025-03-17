@@ -23,7 +23,9 @@ export const getUserTestResultHistory = async (paramsData) => {
         page: paramsData.page,
         size: paramsData.size,
         sort: paramsData.sort,
-        knowledgeArea: paramsData.knowledgeArea
+        knowledgeArea: paramsData.knowledgeArea,
+        minDate: paramsData.minDate,
+        maxDate: paramsData.maxDate
     };
 
 

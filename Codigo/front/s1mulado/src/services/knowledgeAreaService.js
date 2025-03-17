@@ -8,5 +8,7 @@ export const getKnowledgeArea = (id) => {
             return "HUMANITIES"
         case 4:
             return "LANGUAGES"
+        default:
+            return null    
     }
 }
