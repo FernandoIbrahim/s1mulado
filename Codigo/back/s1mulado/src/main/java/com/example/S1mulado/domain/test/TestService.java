@@ -32,13 +32,23 @@ public class TestService {
     private TestQuestionService testQuestionService;
 
 
-
+    /**
+     * Creates a new test for the logged-in user.
+     *
+     * <p>This method first retrieves the logged-in user and verifies if they already have an ongoing test.
+     * If the user has an active test, a {@link TestNotFoundException} is thrown. Otherwise, a new test is created
+     * and associated with randomly selected questions based on a specified subject.</p>
+     *
+     * @param testData The data required to create the test, including the number of questions and knowledge area.
+     * @param userDetails The details of the logged-in user.
+     * @return The newly created {@link Test} entity with associated questions.
+     * @throws TestNotFoundException If the user already has an ongoing test.
+     */
     public Test create(CreateTestDTO testData, UserDetails userDetails) {
 
         User user = userService.findLoggedUser(userDetails);
 
         if(hasCurrentTest(user)){
-            System.out.println("oi");
             throw new TestNotFoundException("O usuário já tem um teste em progresso");
         }
 
@@ -75,6 +85,16 @@ public class TestService {
 
     }
 
+
+    /**
+     * Retrieves the current ongoing test for a given user.
+     *
+     * This method checks if the user has an active (not concluded) test. If a test is found,
+     * it returns the first ongoing test associated with the user. Otherwise, it returns {@code null}.
+     *
+     * @param user The user whose ongoing test is being searched for.
+     * @return The current ongoing {@link Test} for the user, or {@code null} if no active test exists.
+     */
     public Test findCurrentTest(User user){
 
         if(hasCurrentTest(user)){
@@ -91,6 +111,15 @@ public class TestService {
     }
 
 
+    /**
+     * Finalizes a test by marking it as concluded and validating the answers.
+     *
+     * <p>This method retrieves the test by its ID, marks it as concluded,
+     * validates the answers of the associated test questions, and then saves the updated test.</p>
+     *
+     * @param id The ID of the test to be finalized.
+     * @return The updated {@link Test} entity after being marked as concluded.
+     */
     public Test finalize(Long id){
 
         Test test = findById(id);
