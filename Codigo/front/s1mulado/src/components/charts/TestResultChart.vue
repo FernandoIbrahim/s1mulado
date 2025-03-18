@@ -41,7 +41,7 @@ export default {
         // Remove o gráfico anterior antes de redesenhar
         d3.select("#chart").select("svg").remove();
         
-        const width = 500, height = 250, margin = 50;
+        const width = 600, height = 300, margin = 50;
         
         const svg = d3.select("#chart")
           .append("svg")
