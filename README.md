@@ -16,6 +16,5 @@ O projeto está sendo desenvolvido com **Vue.js** no frontend, utilizando **shad
 - 📊 **Relatórios de Desempenho** para monitoramento da evolução dos estudos.
 - 🔍 **Filtros Personalizados** para seleção de questões por matéria e nível de dificuldade.
 - 📄 **Correção Automática** com exibição do gabarito ao final do teste.
-- 🔗 **Integração com APIs Educacionais** para atualização dinâmica do banco de questões.
 
 
