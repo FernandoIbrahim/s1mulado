@@ -77,8 +77,9 @@ public class TestService {
 
     }
 
-    public Test findById(Long id) {
 
+
+    public Test findById(Long id) {
         System.out.println(id);
         return testRepository.findById(id)
                 .orElseThrow(() -> new TestNotFoundException(String.format("Test with id %s not found", id)));
@@ -104,6 +105,12 @@ public class TestService {
 
     }
 
+
+    /**
+     *
+     * @param user
+     * @return a boolean that identifies if the user has an open test
+     */
     public boolean hasCurrentTest(User user) {
 
         return !testRepository.findTestByUserAndConcluded(user, false).isEmpty();
@@ -115,7 +122,7 @@ public class TestService {
      * Finalizes a test by marking it as concluded and validating the answers.
      *
      * <p>This method retrieves the test by its ID, marks it as concluded,
-     * validates the answers of the associated test questions, and then saves the updated test.</p>
+     * validates the answers of the associated test_questions, and then saves the updated test.</p>
      *
      * @param id The ID of the test to be finalized.
      * @return The updated {@link Test} entity after being marked as concluded.
@@ -132,6 +139,12 @@ public class TestService {
     }
 
 
+    /**
+     * Search for a user completed tests
+     *
+     * @param user
+     * @return a List of completed {@link Test} done by the passed user
+     */
     public List<Test> findOwnUserTests(User user) {
         return testRepository.findTestByUser(user);
     }
