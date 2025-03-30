@@ -2,7 +2,7 @@
 
 ## Overview
 
-**Question Collector** is an application developed to integrate with the public ENEM API. It collects and processes exam questions, mapping them to a format compatible with the **Simulated** application. Additionally, the application manages associated question media files (images), downloading and uploading them to a public AWS S3 bucket. After the upload, the system updates the data model with the new image links.
+**Question Collector** is an application developed to integrate s1mulado with the public ENEM API. It collects and processes exam questions, mapping them to a format compatible with the **Simulated** application. Additionally, the application manages associated question media files (images), downloading and uploading them to a public AWS S3 bucket. After the upload, the system updates the data model with the new image links.
 
 ## Features
 
