@@ -4,7 +4,7 @@
         <NavbarComponent class="fixed w-full"> </NavbarComponent>
     </header>
     <main class="flex w-full flex-grow justify-center align-middle bg-white body ">
-        <RouterView />
+        <RouterView/>
     </main>
 
 </template>
