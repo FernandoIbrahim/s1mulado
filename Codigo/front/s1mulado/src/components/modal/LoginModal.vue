@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="fixed inset-0 flex items-center justify-center bg-gray-500 hover:bg-sky-100/10 z-10 backdrop-blur-xs">
+    <div class="fixed inset-0 flex items-center justify-center bg-gray-500 bg-zinc-100/90 z-10 backdrop-blur-xs">
       <div class="bg-white p-6 rounded-lg shadow-lg w-[400px] ">
         <div class = "w-full h-fit flex justify-end p-2">
           <div class="w-9 h-9 flex items-center">
@@ -15,14 +15,14 @@
           </TabsList>
           <TabsContent value="Login" class="p-4">
             <ShadIput type="text" placeholder="username" v-model="username" class=" mt-4" />
-            <ShadIput type="text" placeholder="senha" v-model="password" class=" mt-8"/>
+            <ShadIput type="password" placeholder="senha" v-model="password" class=" mt-8"/>
             <ButtonComponent class=" mt-8" @click="handleLogin" padding-x="2" padding-y="2">Entrar</ButtonComponent> 
           </TabsContent>
           <TabsContent value="Registrar" class="p-4">
             <ShadIput type="text" placeholder="username" v-model="username" class=" mt-4" />
             <ShadIput type="text" placeholder="e-mail" v-model="email" class=" mt-8"/>
             <ShadIput type="text" placeholder="celular" v-model="phoneNumber" class=" mt-8"/>
-            <ShadIput type="text" placeholder="senha" v-model="password" class=" mt-8"/>
+            <ShadIput type="password" placeholder="senha" v-model="password" class=" mt-8"/>
             <ButtonComponent class=" mt-8"  @click="handleRegister" padding-x="2" padding-y="2">Criar conta</ButtonComponent> 
           </TabsContent>
         </Tabs>

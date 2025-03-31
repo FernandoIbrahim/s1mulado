@@ -12,7 +12,7 @@
 
         <!-- 🔹 BOTÃO "COMEÇAR AGORA" -->
         <div class="hidden md:block">
-          <button @click="redirect" class="rounded-md bg-midnight text-white text-lg font-bold py-2 px-4 hover:bg-gray-800">
+          <button @click="redirect" class="rounded-md bg-midnight text-white text-lg font-bold py-2 px-4 ">
             Começar agora
           </button>
         </div>

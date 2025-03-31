@@ -11,7 +11,8 @@
             na prova mais importante da sua vida.
           </h4>
           <div class="w-[200px] mt-5 md:mt-10 mx-auto md:mx-0">
-            <button type="submit" class="w-full rounded-md bg-midnight text-lg font-bold text-white shadow-xs hover:bg-gray-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600 py-2">
+            <button type="submit" @click="redirect"
+              class="w-full rounded-md bg-midnight text-lg font-bold text-white shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600 py-2">
               Começar agora
             </button>
           </div>
@@ -40,15 +41,46 @@
         </div>
       </div>
     </div>
+
+    <LoginModal v-if="this.loginModalStore.active" @login-closed="handleUserCurrentTest"/>
+
   </template>
   
   <script>
+  import { isUserLoggedIn } from '@/services/authService';
+
   import Navbar from '@/components/landing-page/NavbarComponent.vue';
+  import LoginModal from '@/components/modal/LoginModal.vue';
+  import { useLoginModal } from '@/stores/modals'
 
   export default {
     name: "LandingPageLayout",
-    components: {
-        Navbar
+    data(){
+      return {
+        loginModalStore: useLoginModal()
+      }
     },
+    components: {
+        Navbar,
+        LoginModal
+    },
+    methods: {
+
+      async redirect(){
+
+        if(!isUserLoggedIn()) {
+
+          this.loginModalStore.open();
+
+        }else {
+
+          this.$router.push('/home');
+
+        }
+
+      }
+
+    }
+
   };
   </script>

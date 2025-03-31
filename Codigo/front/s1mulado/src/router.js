@@ -6,8 +6,8 @@ import TestHistoryLayout from "@/layouts/TestHistoryLayout.vue"
 import LandingPageLayout from "@/layouts/LandingPageLayout.vue"
 
 const routes = [
-  { path: "/", component: CreateTestLayout, meta: { layout: "default" } },
-  { path: "/home", component: LandingPageLayout },
+  { path: "/", component: LandingPageLayout },
+  { path: "/home", component: CreateTestLayout, meta: { layout: "default" } },
   { path: "/profile", component: UserProfileComponent, meta: { layout: "default" } },
   { path: "/tests", component: TestHistoryLayout, meta: { layout: "default" } }
 ];
