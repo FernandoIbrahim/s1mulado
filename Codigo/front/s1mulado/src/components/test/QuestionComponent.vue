@@ -1,4 +1,5 @@
 <template>
+    <p class="text-gray-500 mb-1" v-html="renderMarkdown(testQuestion.question.title)"></p>
     <p class="text-gray-500 mb-1" v-html="renderMarkdown(testQuestion.question.context || 'Nenhum contexto fornecido.')"></p>
     <p class="text-gray-500"><strong class="font-semibold"></strong> <span v-html="renderMarkdown(testQuestion.question.alternativesIntroduction)"></span></p>
     <h4 class="text-sm font-semibold text-gray-800 mt-4 mb-2">Alternativas</h4>

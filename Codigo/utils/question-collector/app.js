@@ -2,7 +2,7 @@ const axios = require('axios');
 const Question = require('./models/Question');
 const Alternative = require('./models/Alternative');
 
-const getSubject = require('./chatgpt/chatgpt');
+const getFormattedQuestion = require('./chatgpt/chatgpt');
 const { downloadAndUploadAllImages }  = require('./services/image');
 const questionLinkChanger = require('./services/question');
 const {fetchQuestions } = require('./services/apiService');
@@ -12,12 +12,11 @@ async function getQuestions() {
 
     const questions = await fetchQuestions();
 
+    await delay(1000);
     for (var question of questions) {
 
       console.log(question.files);
 
-
-      //atualzia links complexo
       if(question.files != []){
 
         await downloadAndUploadAllImages(question.files);
@@ -26,7 +25,7 @@ async function getQuestions() {
   
       }
 
-      const subjectId = await getSubject(JSON.stringify(question));
+      question = await getFormattedQuestion(JSON.stringify(question));
 
       try {
 
@@ -37,7 +36,7 @@ async function getQuestions() {
           knowledgeArea: "NATURE",
           title: question.title,
           year: question.year,
-          subjectId: subjectId, // Ajustar se necessário
+          subjectId: question.subject_id, // Ajustar se necessário
         });
 
 
@@ -93,5 +92,6 @@ function mapDisciplineToKnowledgeArea(discipline) {
     matematica: 'MATHEMATICS',
   };
   return knowledgeAreaMap[discipline] || null;
+
 }
 

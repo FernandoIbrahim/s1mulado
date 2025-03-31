@@ -2,7 +2,7 @@
     <div class="tooltip">
 
         <button :class="{ 'on-main-url': isMainURL }"
-            class="flex flex-col justify-center items-center bg-white prevent-selection cursor-default p-0.5 rounded-sm w-20"
+            class="flex flex-col justify-center items-center bg-white prevent-selection cursor-default p-0.5 rounded-sm w-20 font-inter"
             @click = "navigate" 
             @mouseover= "isHovering = true" @mouseout="isHovering = false"
             >
