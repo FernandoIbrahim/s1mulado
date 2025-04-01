@@ -25,21 +25,26 @@
 <style>
 
 .body {
-
-    box-sizing: border-box;
-    padding: 10vh 10vw;
-
+  padding: 10vh 4vw
 }
 
 @media  screen and (min-width: 600px){
 
+.body {
+  padding: 10vh 6vw
+}
+
+}
+
+@media  screen and (min-width: 800px){
+
     .body {
-      padding: 10vh 10vw
+      padding: 10vh 8vw
     }
 
 }
 
-@media  screen and (min-width: 840px){
+@media  screen and (min-width: 1000px){
 
     .body {
       padding: 10vh 20vw;

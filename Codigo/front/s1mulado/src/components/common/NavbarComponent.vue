@@ -4,7 +4,7 @@
 
       <div class="left-10 flex relative">
 
-          <IconButtonComponent content = "home" mainUrl = "/" title="Home" />
+          <IconButtonComponent content = "home" mainUrl = "/home" title="Home" />
 
       </div>
 

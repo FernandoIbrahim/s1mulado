@@ -13,9 +13,9 @@
 
       
       <LoginModal v-if="this.loginModalStore.active" @login-closed="handleUserCurrentTest"/>
-
+      <TestStatusModal v-if="testStore.test"  :test="testStore.test"/>
     </div>
-
+    
 </template>
 
 <script>
@@ -33,6 +33,7 @@
   import ButtonComponent from '@/components/common/ButtonComponent.vue'
   import Test from '@/components/test/TestComponent.vue';
   import LoginModal from '@/components/modal/LoginModal.vue';
+  import TestStatusModal from '@/components/test/TestStatusModal.vue';
 
 
   export default {
@@ -62,7 +63,8 @@
       SelectMenu,
       ButtonComponent,
       Test,
-      LoginModal
+      LoginModal,
+      TestStatusModal
     },
 
     methods: {

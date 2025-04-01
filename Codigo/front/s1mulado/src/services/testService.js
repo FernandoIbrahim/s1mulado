@@ -1,4 +1,6 @@
 import { API_JSON_CLIENT} from "@/lib/api";
+import { useCurrentTestStore } from "@/stores/currentTest";
+
 
 export const create = async (test) => {
     const response = await API_JSON_CLIENT.post("/tests", test);
@@ -9,7 +11,8 @@ export const create = async (test) => {
 
 export const patchQuestionAnswer = async (testQuestion) => {
     const response = await API_JSON_CLIENT.patch("/tests/test-questions", testQuestion);
-
+    const testStore = useCurrentTestStore();
+    testStore.update();
     return response;
 
 };

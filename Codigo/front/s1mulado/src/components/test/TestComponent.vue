@@ -25,17 +25,17 @@
     //import AlternativesRadioComponent from '@/components/test/AlternativesRadioComponent.vue';
     import QuestionComponent from '@/components/test/QuestionComponent.vue';
     import ButtonComponent from '@/components/common/ButtonComponent.vue';
+
     import { useCurrentTestStore } from '@/stores/currentTest';
+    import { useToast } from 'vue-toastification'
 
 export default {
   
     name: 'Test',
-    setup() {
-      const testStore = useCurrentTestStore()
-      return { testStore }
-    },
     data(){
         return {
+          testStore: useCurrentTestStore(),
+          toast: useToast()
         }
     },
     props: {
@@ -53,12 +53,10 @@ export default {
           const response = await finalizeTest(this.test.id);
           const answerTestData = response.data;
           await this.testStore.set(answerTestData);
-          
-          console.log(this.testStore.test);
 
         }catch(error){
 
-          console.log(error);
+          this.toast.error("Complete todas as questões antes de finalizar");
 
         }
 

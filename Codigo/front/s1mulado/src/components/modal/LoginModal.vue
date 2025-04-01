@@ -90,6 +90,7 @@ export default{
         
         this.$emit("login-closed");
         this.loginModalStore.close()
+        this.$router.push('/home');
         
 
       } catch (error) {
@@ -120,7 +121,7 @@ export default{
         console.log('Registro realizado:', response.data);
 
         this.loginModalStore.close()
-        router.go(0)
+        router.go(0);
 
       } catch (error) {
 
