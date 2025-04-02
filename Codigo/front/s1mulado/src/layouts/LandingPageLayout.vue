@@ -12,7 +12,7 @@
           </h4>
           <div class="w-[200px] mt-5 md:mt-10 mx-auto md:mx-0">
             <button type="submit" @click="redirect"
-              class="w-full rounded-md bg-midnight text-lg font-bold text-white shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600 py-2">
+              class="w-full rounded-md bg-midnight text-lg font-bold text-white shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2  py-2">
               Começar agora
             </button>
           </div>
