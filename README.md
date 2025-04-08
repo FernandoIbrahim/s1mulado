@@ -2,7 +2,7 @@
 
 **s1mulado** é uma plataforma gratuita para a realização de **simulados do ENEM**, voltada para estudantes que desejam praticar com questões reais de provas anteriores. A aplicação tem como objetivo **democratizar o acesso à educação**, oferecendo um ambiente prático, intuitivo e fiel ao exame oficial.
 
-As questões são organizadas por áreas do conhecimento e categorizadas de acordo com os **principais temas cobrados em cada disciplina**, permitindo uma experiência de simulado realista e direcionada.
+As questões são organizadas por área do conhecimento e classificadas conforme os principais temas recorrentes em cada disciplina, permitindo a criação de simulados mais direcionados e alinhados com o perfil da prova. A seleção das questões é feita de forma aleatória e inteligente, garantindo uma experiência realista e personalizada para o estudante.
 
 ---
 
