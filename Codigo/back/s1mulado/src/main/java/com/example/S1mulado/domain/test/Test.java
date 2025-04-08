@@ -42,6 +42,7 @@ public class Test {
     private KnowledgeArea knowledgeArea;
 
     @OneToMany(mappedBy = "test")
+    @OrderBy("id ASC")
     private List<TestQuestion> testQuestions;
 
     @JsonBackReference

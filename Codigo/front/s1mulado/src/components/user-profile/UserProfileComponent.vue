@@ -33,7 +33,7 @@
 
             return {
                 user: null,
-                selectedKnowledgeArea: null,
+                selectedKnowledgeArea: { id: 2, name: 'Natureza' },
 
                 options: [
                     { id: 1, name: 'Exatas' },

@@ -10,10 +10,6 @@
 
       <div class=" mr-20 relative">
           <ul class="flex flex-row gap-[4vw] items-center">
-              <li class="flex items-center">
-                  <IconButtonComponent content = "project" mainUrl = "/disputas" title="Disputas"/>
-              </li>
-
               <li>
                   <IconButtonComponent content = "education" mainUrl = "/tests" title="Provas"/>
               </li>
